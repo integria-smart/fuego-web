@@ -271,8 +271,8 @@ export default function Motion() {
         lienzo.width = ancho * dpr;
         lienzo.height = alto * dpr;
         origen = {
-          x: f.left - h.left + f.width * 0.528,
-          y: f.top - h.top + f.height * 0.655,
+          x: f.left - h.left + f.width * 0.259,
+          y: f.top - h.top + f.height * 0.585,
         };
       };
       const nacer = (c: Partial<Chispa> = {}): Chispa => {

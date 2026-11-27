@@ -15,8 +15,8 @@
   --fuego: #ba4719;
   --tinta: #efe4d4;
   /* Punto de la llama dentro de la foto de Mónica */
-  --fx: 52.8%;
-  --fy: 66.6%;
+  --fx: 25.9%;
+  --fy: 59.6%;
 }
 
 html {
@@ -198,10 +198,10 @@ body.claro .top {
 }
 .hero-figure {
   position: absolute;
-  left: 50%;
+  left: 54%;
   bottom: 0;
   height: 94svh;
-  aspect-ratio: 851 / 1280;
+  aspect-ratio: 851 / 1130;
   translate: -50% 0;
   z-index: 1;
   transform-origin: var(--fx) var(--fy);
@@ -225,14 +225,14 @@ body.claro .top {
     circle at var(--fx) var(--fy),
     #000 0%,
     rgba(0, 0, 0, 0.9) calc(var(--r) * 0.34%),
-    rgba(0, 0, 0, 0.35) calc(var(--r) * 0.7%),
+    rgba(0, 0, 0, 0.62) calc(var(--r) * 0.68%),
     transparent calc(var(--r) * 1%)
   );
   mask-image: radial-gradient(
     circle at var(--fx) var(--fy),
     #000 0%,
     rgba(0, 0, 0, 0.9) calc(var(--r) * 0.34%),
-    rgba(0, 0, 0, 0.35) calc(var(--r) * 0.7%),
+    rgba(0, 0, 0, 0.62) calc(var(--r) * 0.68%),
     transparent calc(var(--r) * 1%)
   );
 }
@@ -271,8 +271,8 @@ body.claro .top {
   position: absolute;
   left: var(--fx);
   top: var(--fy);
-  width: 3%;
-  translate: -50% -78%;
+  width: 2.2%;
+  translate: -50% -80%;
   transform-origin: 50% 92%;
   opacity: 0;
   filter: drop-shadow(0 0 6px #ffb347) drop-shadow(0 0 18px rgba(240, 122, 30, 0.8));

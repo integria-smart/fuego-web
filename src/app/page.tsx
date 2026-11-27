@@ -37,14 +37,14 @@ export default function Home() {
           <div className="hero-logo" aria-hidden="true" />
           <div className="hero-figure" style={{ "--r": 0 } as React.CSSProperties}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="fig dark" src="/img/monica.webp" alt="" width={851} height={1280} />
+            <img className="fig dark" src="/img/monica.webp" alt="" width={851} height={1130} />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               className="fig lit"
               src="/img/monica.webp"
-              alt="Mónica Ruiz sostiene una vela Fuego encendida"
+              alt="Mónica Ruiz, sentada, mira la vela Fuego encendida que sostiene en las manos"
               width={851}
-              height={1280}
+              height={1130}
             />
             <div className="glow" aria-hidden="true" />
             <div className="spark" aria-hidden="true" />
