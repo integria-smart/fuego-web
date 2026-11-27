@@ -224,15 +224,17 @@ body.claro .top {
   -webkit-mask-image: radial-gradient(
     circle at var(--fx) var(--fy),
     #000 0%,
-    rgba(0, 0, 0, 0.9) calc(var(--r) * 0.34%),
-    rgba(0, 0, 0, 0.62) calc(var(--r) * 0.68%),
+    rgba(0, 0, 0, 0.82) calc(var(--r) * 0.28%),
+    rgba(0, 0, 0, 0.5) calc(var(--r) * 0.56%),
+    rgba(0, 0, 0, 0.2) calc(var(--r) * 0.8%),
     transparent calc(var(--r) * 1%)
   );
   mask-image: radial-gradient(
     circle at var(--fx) var(--fy),
     #000 0%,
-    rgba(0, 0, 0, 0.9) calc(var(--r) * 0.34%),
-    rgba(0, 0, 0, 0.62) calc(var(--r) * 0.68%),
+    rgba(0, 0, 0, 0.82) calc(var(--r) * 0.28%),
+    rgba(0, 0, 0, 0.5) calc(var(--r) * 0.56%),
+    rgba(0, 0, 0, 0.2) calc(var(--r) * 0.8%),
     transparent calc(var(--r) * 1%)
   );
 }
