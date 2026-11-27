@@ -5,27 +5,37 @@
   inherits: true;
   initial-value: 0;
 }
+/* Cuánta luz hay en el inicio: 0 es penumbra cálida, 1 es de día. */
+@property --luz {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
 
 :root {
   --negro: #201514;
   --arena: #c19971;
-  --cafe: #93675a;
+  --cafe: #8a5f51;
   --terracota: #7d381b;
-  --beige: #c7b9a6;
+  --beige: #e7dbc9;
   --fuego: #ba4719;
-  --tinta: #efe4d4;
+  /* Fondo beige cálido, texto café suave y crema para lo que va sobre color */
+  --fondo: #f1e9dc;
+  --tinta: #45322a;
+  --crema: #f8f2e8;
+  --penumbra: #6f584b;
   /* Punto de la llama dentro de la foto de Mónica */
   --fx: 25.9%;
   --fy: 59.6%;
 }
 
 html {
-  background: var(--negro);
+  background: var(--fondo);
 }
 
 body {
   margin: 0;
-  background: var(--negro);
+  background: var(--fondo);
   color: var(--tinta);
   font-family: var(--font-label), system-ui, sans-serif;
   font-weight: 300;
@@ -49,14 +59,14 @@ h3 {
 
 em {
   font-style: italic;
-  color: var(--arena);
+  color: var(--cafe);
 }
 
 .eyebrow {
   font-size: 12px;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--arena);
+  color: var(--cafe);
   margin: 0 0 18px;
 }
 
@@ -85,27 +95,27 @@ em {
 }
 .btn-line:hover {
   border-color: var(--fuego);
-  box-shadow: 0 0 28px -6px var(--fuego);
+  box-shadow: 0 8px 26px -14px var(--fuego);
 }
 .btn-fire {
   background: var(--fuego);
   color: #fff3e4;
-  box-shadow: 0 0 36px -8px var(--fuego);
+  box-shadow: 0 10px 30px -14px color-mix(in srgb, var(--fuego) 80%, transparent);
 }
 .btn-fire:hover {
-  background: #d2571f;
-  box-shadow: 0 0 52px -6px #e0661f;
+  background: #c7541f;
+  box-shadow: 0 12px 34px -12px color-mix(in srgb, var(--fuego) 90%, transparent);
 }
 .btn-dark {
-  background: var(--negro);
-  color: var(--tinta);
+  background: var(--tinta);
+  color: var(--crema);
 }
 .btn-dark:hover {
   background: var(--terracota);
 }
 .btn:focus-visible,
 a:focus-visible {
-  outline: 2px solid var(--arena);
+  outline: 2px solid var(--cafe);
   outline-offset: 3px;
 }
 
@@ -128,8 +138,7 @@ a:focus-visible {
   height: 300px;
   margin: -150px 0 0 -150px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 168, 88, 0.14), rgba(186, 71, 25, 0.05) 40%, transparent 65%);
-  mix-blend-mode: screen;
+  background: radial-gradient(circle, rgba(255, 190, 120, 0.2), rgba(240, 150, 80, 0.07) 40%, transparent 65%);
   pointer-events: none;
   z-index: 40;
   opacity: 0;
@@ -167,7 +176,7 @@ a:focus-visible {
   opacity: 1;
 }
 body.claro .top {
-  color: var(--negro);
+  color: var(--tinta);
 }
 
 /* ---------- Hero: el encendido ---------- */
@@ -177,6 +186,20 @@ body.claro .top {
   min-height: 620px;
   overflow: hidden;
   isolation: isolate;
+}
+/* La penumbra cálida del comienzo: se disuelve en beige cuando prende la llama. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(
+    120% 90% at 46% 60%,
+    color-mix(in srgb, var(--penumbra) 86%, var(--fondo)),
+    var(--penumbra)
+  );
+  opacity: calc(1 - var(--luz));
+  pointer-events: none;
 }
 .hero-logo {
   position: absolute;
@@ -192,7 +215,7 @@ body.claro .top {
     linear-gradient(#000 38%, transparent 72%);
   mask-composite: intersect;
   translate: -50% 0;
-  color: var(--terracota);
+  color: var(--arena);
   opacity: 0;
   z-index: 0;
 }
@@ -216,8 +239,7 @@ body.claro .top {
   -webkit-user-drag: none;
 }
 .fig.dark {
-  filter: brightness(0.2) saturate(0.5) contrast(1.1);
-  opacity: 0;
+  filter: brightness(calc(0.5 + var(--luz) * 0.5)) saturate(calc(0.55 + var(--luz) * 0.45));
 }
 .fig.lit {
   filter: sepia(0.22) saturate(1.2) contrast(1.04);
@@ -248,12 +270,11 @@ body.claro .top {
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(255, 190, 110, 0.5) 0%,
-    rgba(240, 122, 30, 0.2) 14%,
-    rgba(186, 71, 25, 0.1) 32%,
+    rgba(255, 214, 150, 0.6) 0%,
+    rgba(250, 178, 104, 0.26) 14%,
+    rgba(240, 160, 96, 0.1) 32%,
     transparent 60%
   );
-  mix-blend-mode: screen;
   opacity: 0;
   pointer-events: none;
 }
@@ -266,7 +287,6 @@ body.claro .top {
   translate: -50% -50%;
   border-radius: 50%;
   background: radial-gradient(circle, #fff 0%, #ffd58a 25%, rgba(240, 122, 30, 0.4) 50%, transparent 70%);
-  mix-blend-mode: screen;
   opacity: 0;
 }
 .flame {
@@ -286,7 +306,6 @@ body.claro .top {
   height: 100%;
   z-index: 2;
   pointer-events: none;
-  mix-blend-mode: screen;
 }
 
 .hero-copy,
@@ -337,7 +356,7 @@ body.claro .top {
   font-size: 10px;
   letter-spacing: 0.4em;
   text-transform: uppercase;
-  color: var(--arena);
+  color: var(--cafe);
 }
 .scroll-hint::after {
   content: "";
@@ -345,7 +364,7 @@ body.claro .top {
   width: 1px;
   height: 26px;
   margin: 8px auto 0;
-  background: linear-gradient(var(--arena), transparent);
+  background: linear-gradient(var(--cafe), transparent);
   animation: gota 2.2s ease-in-out infinite;
   transform-origin: top;
 }
@@ -382,7 +401,7 @@ body.claro .top {
 }
 .manifiesto-texto > span:nth-child(n + 3) {
   font-style: italic;
-  color: var(--arena);
+  color: var(--cafe);
 }
 .hechos {
   list-style: none;
@@ -394,7 +413,7 @@ body.claro .top {
   gap: 24px;
 }
 .hechos li {
-  border-top: 1px solid color-mix(in srgb, var(--arena) 35%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--cafe) 35%, transparent);
   padding-top: 22px;
 }
 .hechos strong {
@@ -409,7 +428,7 @@ body.claro .top {
   font-size: 12px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--arena);
+  color: var(--cafe);
 }
 
 /* ---------- Catálogo interactivo ---------- */
@@ -418,7 +437,7 @@ body.claro .top {
   font-size: 11px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--arena);
+  color: var(--cafe);
 }
 .cat-pieza h3 {
   font-size: clamp(24px, 2.2vw, 32px);
@@ -474,11 +493,11 @@ body.claro .top {
 }
 .cat::before {
   top: 0;
-  background: linear-gradient(var(--negro), transparent);
+  background: linear-gradient(var(--fondo), transparent);
 }
 .cat::after {
   bottom: 0;
-  background: linear-gradient(transparent, var(--negro));
+  background: linear-gradient(transparent, var(--fondo));
 }
 /* La luz de la colección: se apaga y vuelve a subir con cada cambio. */
 .cat-luz {
@@ -487,7 +506,7 @@ body.claro .top {
   pointer-events: none;
   background: radial-gradient(
     60% 55% at 68% 58%,
-    color-mix(in srgb, var(--brillo) 22%, transparent),
+    color-mix(in srgb, var(--brillo) 45%, transparent),
     transparent 70%
   );
   opacity: 1;
@@ -511,7 +530,7 @@ body.claro .top {
 .cat-tabs {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-bottom: 1px solid color-mix(in srgb, var(--arena) 30%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--cafe) 30%, transparent);
 }
 .cat-tabs button {
   position: relative;
@@ -541,7 +560,7 @@ body.claro .top {
   bottom: -1px;
   height: 2px;
   background: var(--fuego);
-  box-shadow: 0 0 18px 2px color-mix(in srgb, var(--fuego) 80%, transparent);
+  box-shadow: 0 0 12px 0 color-mix(in srgb, var(--fuego) 30%, transparent);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -552,7 +571,7 @@ body.claro .top {
 .cat-tabs button:focus-visible,
 .cat-chips button:focus-visible,
 .cat-flechas button:focus-visible {
-  outline: 2px solid var(--arena);
+  outline: 2px solid var(--cafe);
   outline-offset: 4px;
 }
 .cat-num {
@@ -573,7 +592,7 @@ body.claro .top {
   cursor: pointer;
   min-height: 40px;
   padding: 0 18px;
-  border: 1px solid color-mix(in srgb, var(--arena) 45%, transparent);
+  border: 1px solid color-mix(in srgb, var(--cafe) 45%, transparent);
   border-radius: 999px;
   background: transparent;
   color: var(--tinta);
@@ -587,12 +606,12 @@ body.claro .top {
     border-color 0.4s;
 }
 .cat-chips button:hover {
-  border-color: var(--arena);
+  border-color: var(--cafe);
 }
 .cat-chips button.activa {
-  background: var(--arena);
-  border-color: var(--arena);
-  color: var(--negro);
+  background: var(--cafe);
+  border-color: var(--cafe);
+  color: var(--crema);
 }
 .cat-panel {
   flex: 1;
@@ -606,14 +625,13 @@ body.claro .top {
 }
 .cat-panel.off {
   opacity: 0;
-  filter: brightness(0.3);
 }
 .cat-info h2 {
   font-size: clamp(32px, 3.5vw, 58px);
   line-height: 1.04;
 }
 .cat-info em {
-  color: var(--arena);
+  color: var(--cafe);
 }
 .cat-info p {
   margin: 18px 0 0;
@@ -625,7 +643,7 @@ body.claro .top {
 .cat-info .cat-resumen {
   font-size: 13px;
   color: color-mix(in srgb, var(--tinta) 55%, transparent);
-  border-top: 1px solid color-mix(in srgb, var(--arena) 25%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--cafe) 25%, transparent);
   padding-top: 16px;
 }
 .cat-info > *,
@@ -658,7 +676,6 @@ body.claro .top {
 @keyframes encender {
   from {
     opacity: 0;
-    filter: brightness(0.25);
     transform: translateY(16px);
   }
   to {
@@ -686,7 +703,7 @@ body.claro .top {
   scale: 1.05;
 }
 .cat-pieza .vela-linea {
-  color: var(--arena);
+  color: var(--cafe);
 }
 .cat-pieza h3 {
   font-size: clamp(20px, 1.7vw, 27px);
@@ -709,7 +726,7 @@ body.claro .top {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  border: 1px solid color-mix(in srgb, var(--arena) 45%, transparent);
+  border: 1px solid color-mix(in srgb, var(--cafe) 45%, transparent);
   background: transparent;
   color: var(--tinta);
   font-size: 17px;
@@ -718,16 +735,16 @@ body.claro .top {
     color 0.4s;
 }
 .cat-flechas button:hover {
-  background: var(--arena);
-  color: var(--negro);
+  background: var(--cafe);
+  color: var(--crema);
 }
 .cat-invitacion {
   justify-self: start;
   max-width: 520px;
-  border: 1px solid color-mix(in srgb, var(--arena) 30%, transparent);
+  border: 1px solid color-mix(in srgb, var(--cafe) 30%, transparent);
   border-radius: 28px;
   padding: clamp(28px, 4vw, 56px);
-  background: color-mix(in srgb, var(--arena) 6%, transparent);
+  background: color-mix(in srgb, var(--cafe) 6%, transparent);
   animation-delay: 0.18s;
 }
 .cat-invitacion p {
@@ -800,14 +817,14 @@ body.claro .top {
   max-width: 12ch;
 }
 .historia-titulo em {
-  color: var(--arena);
+  color: var(--cafe);
 }
 .historia-firma {
   margin: 28px 0 0;
   font-family: var(--font-display), Georgia, serif;
   font-style: italic;
   font-size: 22px;
-  color: var(--arena);
+  color: var(--cafe);
 }
 .historia-texto p {
   margin: 0 0 1.5em;
@@ -833,7 +850,7 @@ body.claro .top {
 .comprar {
   position: relative;
   background: var(--beige);
-  color: var(--negro);
+  color: var(--tinta);
   padding: clamp(100px, 18svh, 200px) clamp(18px, 6vw, 96px) clamp(80px, 14svh, 160px);
 }
 .comprar::before {
@@ -890,7 +907,7 @@ body.claro .top {
 
 .pie {
   background: var(--beige);
-  color: var(--negro);
+  color: var(--tinta);
   padding: 40px clamp(18px, 6vw, 96px) 48px;
   display: grid;
   justify-items: center;
@@ -931,12 +948,12 @@ body.claro .top {
   border-radius: 50%;
   display: grid;
   place-items: center;
-  color: var(--tinta);
+  color: var(--crema);
   background: radial-gradient(circle at 50% 68%, #f0a04a 0%, var(--fuego) 42%, var(--terracota) 100%);
   box-shadow:
     0 0 0 1px color-mix(in srgb, #f0a04a 45%, transparent),
-    0 0 26px 2px color-mix(in srgb, var(--fuego) 70%, transparent),
-    0 10px 26px -8px rgb(0 0 0 / 0.6);
+    0 0 20px 0 color-mix(in srgb, var(--fuego) 40%, transparent),
+    0 10px 24px -10px rgb(69 50 42 / 0.45);
   transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .wa-circulo::before {
@@ -944,7 +961,7 @@ body.claro .top {
   position: absolute;
   inset: -9px;
   border-radius: 50%;
-  background: radial-gradient(circle, color-mix(in srgb, var(--fuego) 55%, transparent), transparent 68%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--fuego) 38%, transparent), transparent 68%);
   z-index: -1;
   animation: brasa-respira 3.2s ease-in-out infinite;
 }
@@ -958,8 +975,8 @@ body.claro .top {
 .wa-texto {
   padding: 9px 16px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--negro) 88%, transparent);
-  border: 1px solid color-mix(in srgb, var(--arena) 40%, transparent);
+  background: var(--crema);
+  border: 1px solid color-mix(in srgb, var(--cafe) 40%, transparent);
   color: var(--tinta);
   font-size: 11px;
   letter-spacing: 0.2em;
@@ -1050,6 +1067,12 @@ body.claro .top {
   .hero-actions {
     justify-content: center;
   }
+  /* En celular los botones quedan sobre la ropa oscura de Mónica. */
+  .hero-actions .btn-line {
+    background: color-mix(in srgb, var(--crema) 92%, transparent);
+    border-color: transparent;
+    color: var(--tinta);
+  }
   .scroll-hint {
     display: none;
   }
@@ -1080,7 +1103,7 @@ body.claro .top {
   }
   .cat-tabs button {
     padding-bottom: 12px;
-    border-bottom: 1px solid color-mix(in srgb, var(--arena) 30%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--cafe) 30%, transparent);
     font-size: 21px;
   }
   .cat-chips {
@@ -1148,12 +1171,14 @@ body.claro .top {
     animation: none;
   }
   .late,
-  .fig.dark,
   .glow {
     opacity: 1;
   }
+  .hero {
+    --luz: 1;
+  }
   .hero-logo {
-    opacity: 0.55;
+    opacity: 0.4;
   }
   .flame,
   .h1 .w > span {

@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#201514",
+  themeColor: "#f1e9dc",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -46,7 +46,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         {/* Sin JavaScript no hay encendido: se muestra la página ya iluminada. */}
         <noscript>
-          <style>{`.late,.fig.dark,.glow,.flame,.h1 .w>span,.manifiesto-texto .w,.vela{opacity:1}.hero-logo{opacity:.5}.hero-figure{--r:92!important}`}</style>
+          <style>{`.late,.glow,.flame,.h1 .w>span,.manifiesto-texto .w,.vela{opacity:1}.hero-logo{opacity:.4}.hero{--luz:1}.hero-figure{--r:92!important}`}</style>
         </noscript>
         {children}
       </body>
