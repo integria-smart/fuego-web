@@ -91,3 +91,73 @@ export const velas: Vela[] = [
     brillo: "#e7c56a",
   },
 ];
+
+export type Pieza = {
+  id: string;
+  nombre: string;
+  linea: string;
+  detalle: string;
+  precio: string;
+  foto: string;
+  mensaje: string;
+};
+
+export const bouquets: Pieza[] = [
+  {
+    id: "bouquet-maxi",
+    nombre: "Bouquet Maxi",
+    linea: "10 a 15 flores",
+    detalle: "Un jardín entero para decir lo que no cabe en palabras.",
+    precio: "$200.000",
+    foto: "/img/bouquet-maxi.webp",
+    mensaje: "Hola Fuego, quiero un Bouquet Maxi ($200.000).",
+  },
+  {
+    id: "bouquet-mediano",
+    nombre: "Bouquet Mediano",
+    linea: "8 a 10 flores",
+    detalle: "El punto justo entre el detalle y la sorpresa.",
+    precio: "$150.000",
+    foto: "/img/bouquet-mediano.webp",
+    mensaje: "Hola Fuego, quiero un Bouquet Mediano ($150.000).",
+  },
+  {
+    id: "bouquet-mini",
+    nombre: "Bouquet Mini",
+    linea: "6 a 8 flores",
+    detalle: "Pequeño como un secreto, tierno como un abrazo.",
+    precio: "$100.000",
+    foto: "/img/bouquet-mini.webp",
+    mensaje: "Hola Fuego, quiero un Bouquet Mini ($100.000).",
+  },
+];
+
+export const recordatorios: Pieza[] = [
+  {
+    id: "rec-cumple",
+    nombre: "Cumpleaños",
+    linea: "Rosas, margaritas, cupcakes",
+    detalle: "Para que cada invitado se lleve un pedacito de la fiesta.",
+    precio: "Desde $7.000",
+    foto: "/img/rec-cumple.webp",
+    mensaje: "Hola Fuego, quiero cotizar recordatorios de cumpleaños.",
+  },
+  {
+    id: "rec-bautizo",
+    nombre: "Bautizos",
+    linea: "Angelitos, cruces, vírgenes",
+    detalle: "Una luz que guarda la bendición de ese día.",
+    precio: "Desde $7.500",
+    foto: "/img/rec-bautizo.webp",
+    mensaje: "Hola Fuego, quiero cotizar recordatorios de bautizo.",
+  },
+  {
+    id: "rec-baby",
+    nombre: "Baby shower",
+    linea: "Ositos, elefantes, nubes",
+    detalle: "La primera bienvenida, hecha vela.",
+    precio: "Desde $6.500",
+    foto: "/img/rec-baby.webp",
+    mensaje: "Hola Fuego, quiero cotizar recordatorios de baby shower.",
+  },
+];
