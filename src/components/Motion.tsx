@@ -26,6 +26,7 @@ export default function Motion() {
       // ---------- Sin movimiento: estado final y nada más ----------
       if (quieto) {
         gsap.set(figura, { "--r": 92 });
+        gsap.set(".hero", { "--luz": 1 });
         return;
       }
 
@@ -56,7 +57,7 @@ export default function Motion() {
           ease: "sine.inOut",
           onComplete: parpadeo,
         });
-        gsap.to(".glow", { opacity: gsap.utils.random(0.9, 1), duration: 0.9, overwrite: true });
+        gsap.to(".glow", { opacity: gsap.utils.random(0.85, 1), duration: 0.9, overwrite: "auto" });
         gsap.to(".flame", {
           scaleY: gsap.utils.random(0.94, 1.1),
           scaleX: gsap.utils.random(0.95, 1.03),
@@ -67,26 +68,27 @@ export default function Motion() {
         });
       };
 
-      const encender = gsap.timeline({ delay: 0.7, paused: true });
+      // Encendido corto: unos segundos de penumbra cálida y la luz se vuelve beige.
+      const encender = gsap.timeline({ delay: 0.5, paused: true });
       encender
         .to(".spark", { scale: 1, opacity: 1, duration: 0.14, ease: "power2.out" })
         .to(".spark", { scale: 2.2, opacity: 0, duration: 0.6, ease: "power2.out" })
-        .to(".flame", { scale: 1, duration: 1.6, ease: "power2.out" }, "<0.05")
-        // La luz sube despacio: primero las manos y la vela, luego el rostro.
-        .to(figura, { "--r": 13, duration: 2.2, ease: "sine.out" }, "<")
-        .to(".glow", { opacity: 1, duration: 3, ease: "sine.out" }, "<")
-        .to(".fig.dark", { opacity: 1, duration: 3.4, ease: "sine.out" }, "<0.2")
+        .to(".flame", { scale: 1, duration: 1.2, ease: "power2.out" }, "<0.05")
+        // La luz nace en las manos y la vela, y enseguida llena el lugar.
+        .to(figura, { "--r": 16, duration: 1.1, ease: "sine.out" }, "<")
+        .to(".glow", { opacity: 1, duration: 1.8, ease: "sine.out" }, "<")
         .add(() => {
           encendida = true;
         }, "<0.4")
-        .to(figura, { "--r": 92, duration: 6.5, ease: "sine.inOut" }, ">-2.4")
-        .to(".hero-logo", { opacity: 0.5, duration: 2.4, ease: "power1.out" }, "<")
+        .to(figura, { "--r": 92, duration: 3, ease: "sine.inOut" }, ">-0.5")
+        .to(".hero", { "--luz": 1, duration: 2.8, ease: "sine.inOut" }, "<")
+        .to(".hero-logo", { opacity: 0.4, duration: 2.2, ease: "power1.out" }, "<0.6")
         .to(
           ".h1 .w > span",
           { yPercent: 0, duration: 1.1, stagger: 0.1, ease: "power3.out" },
-          "<0.3",
+          "<0.5",
         )
-        .to(".late", { opacity: 1, y: 0, duration: 0.9, stagger: 0.1, ease: "power2.out" }, "<0.5")
+        .to(".late", { opacity: 1, y: 0, duration: 0.9, stagger: 0.1, ease: "power2.out" }, "<0.4")
         .add(parpadeo);
 
       const foto = figura.querySelector<HTMLImageElement>(".fig.lit");
@@ -255,12 +257,12 @@ export default function Motion() {
           c.x += c.vx + Math.sin((c.vida + i * 40) / 34) * 0.22;
           c.y += c.vy;
           const t = c.vida / c.max;
-          const a = Math.sin(Math.min(t, 1) * Math.PI) * 0.6;
+          const a = Math.sin(Math.min(t, 1) * Math.PI) * 0.5;
           const rad = c.r * 5;
           const grad = g.createRadialGradient(c.x, c.y, 0, c.x, c.y, rad);
-          grad.addColorStop(0, `rgba(255, 214, 150, ${a})`);
-          grad.addColorStop(0.3, `rgba(240, 132, 40, ${a * 0.55})`);
-          grad.addColorStop(1, "rgba(186, 71, 25, 0)");
+          grad.addColorStop(0, `rgba(236, 150, 70, ${a})`);
+          grad.addColorStop(0.3, `rgba(226, 128, 60, ${a * 0.5})`);
+          grad.addColorStop(1, "rgba(214, 120, 60, 0)");
           g.fillStyle = grad;
           g.beginPath();
           g.arc(c.x, c.y, rad, 0, Math.PI * 2);
