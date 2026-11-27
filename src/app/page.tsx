@@ -25,6 +25,7 @@ export default function Home() {
         <a href="#inicio" className="logo-mark" aria-label="Fuego by Mónica Ruiz" />
         <nav aria-label="Principal">
           <a href="#aromas">Velas</a>
+          <a href="#historia">Nuestra historia</a>
           <a href="#comprar">Cómo comprar</a>
         </nav>
         <a className="btn btn-line" href={waGeneral} target="_blank" rel="noopener">
@@ -150,6 +151,54 @@ export default function Home() {
                 </article>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className="historia" id="historia">
+          <div className="historia-titulo">
+            <p className="eyebrow">Nuestra historia</p>
+            <h2>
+              Hay luces que uno enciende <em>para no perderse</em>
+            </h2>
+            <p className="historia-firma">Mónica Ruiz</p>
+          </div>
+          <div className="historia-texto">
+            <p>
+              Hubo un tiempo en que los días se me hicieron grises. No sabía bien hacia dónde
+              caminar, y lo único que tenía claro era un ritual pequeño: llegar a casa, encender
+              una vela y sentarme junto a Luna, mi fiel compañera de cuatro patas. Aquella llamita
+              no cambiaba el mundo. Pero mientras su luz bailaba frente a mí, todo se aquietaba y
+              yo volvía a respirar despacio.
+            </p>
+            <p>
+              De esa calma nació una pregunta, suave como un susurro: ¿cómo nace una vela? Y de esa
+              pregunta, un camino. Mis primeras velas fueron tímidas y no quisieron tomar forma.
+              Las siguientes las entregué con más ilusión que ganancia. Dije que sí a mi primer
+              encargo cuando apenas estaba aprendiendo, y fue ese sí el que me enseñó. Así llegan
+              casi todas las cosas bonitas: antes de que uno se sienta listo.
+            </p>
+            <p>
+              Después vinieron las noches largas. Tres moldes elegidos con más fe que certezas, y
+              un encargo de mil velas que parecía demasiado grande para una sola semana. Aun así,
+              floreció. Mientras la ciudad dormía, yo las iba haciendo una por una, con las manos
+              cansadas y el corazón despierto. Fue entonces cuando descubrí que la duda y la
+              ilusión caminan muy cerca, y que uno elige a cuál darle la mano.
+            </p>
+            <p className="historia-destacado">
+              La llamé Fuego porque eso fue lo que me abrigó: una luz pequeñita que nunca quiso
+              apagarse.
+            </p>
+            <p>
+              Y porque creo que todos guardamos una adentro, esperando que alguien se acerque a
+              encenderla. Por eso mis velas nacen para acompañar momentos: el baño tibio al final
+              de un día largo, la mesa donde se celebra, el silencio que por fin te regalas. Cada
+              una sale de mis manos con una intención, y la primera es siempre la misma: que
+              encuentres tu calma.
+            </p>
+            <p>Si hoy tu cielo está nublado, enciende una. A veces, volver a empezar se parece a eso.</p>
+            <a className="btn btn-fire" href="#aromas">
+              Enciende la tuya
+            </a>
           </div>
         </section>
 
