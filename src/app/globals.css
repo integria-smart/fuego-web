@@ -1,0 +1,721 @@
+@import "tailwindcss";
+
+@property --r {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+:root {
+  --negro: #201514;
+  --arena: #c19971;
+  --cafe: #93675a;
+  --terracota: #7d381b;
+  --beige: #c7b9a6;
+  --fuego: #ba4719;
+  --tinta: #efe4d4;
+  /* Punto de la llama dentro de la foto de Mónica */
+  --fx: 52.8%;
+  --fy: 66.6%;
+}
+
+html {
+  background: var(--negro);
+}
+
+body {
+  margin: 0;
+  background: var(--negro);
+  color: var(--tinta);
+  font-family: var(--font-label), system-ui, sans-serif;
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 300;
+  font-variation-settings: "SOFT" 100;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+em {
+  font-style: italic;
+  color: var(--arena);
+}
+
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--arena);
+  margin: 0 0 18px;
+}
+
+/* ---------- Botones ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 24px;
+  border-radius: 999px;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color 0.35s,
+    color 0.35s,
+    box-shadow 0.35s,
+    border-color 0.35s;
+}
+.btn-line {
+  border: 1px solid color-mix(in srgb, currentColor 45%, transparent);
+  color: inherit;
+}
+.btn-line:hover {
+  border-color: var(--fuego);
+  box-shadow: 0 0 28px -6px var(--fuego);
+}
+.btn-fire {
+  background: var(--fuego);
+  color: #fff3e4;
+  box-shadow: 0 0 36px -8px var(--fuego);
+}
+.btn-fire:hover {
+  background: #d2571f;
+  box-shadow: 0 0 52px -6px #e0661f;
+}
+.btn-dark {
+  background: var(--negro);
+  color: var(--tinta);
+}
+.btn-dark:hover {
+  background: var(--terracota);
+}
+.btn:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--arena);
+  outline-offset: 3px;
+}
+
+/* ---------- Logo como máscara: toma el color del texto ---------- */
+.logo-mark,
+.hero-logo {
+  display: block;
+  aspect-ratio: 422.8 / 247;
+  background-color: currentColor;
+  -webkit-mask: url(/logo.svg) center / contain no-repeat;
+  mask: url(/logo.svg) center / contain no-repeat;
+}
+
+/* ---------- Halo que sigue el cursor ---------- */
+.halo {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 620px;
+  height: 620px;
+  margin: -310px 0 0 -310px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 168, 88, 0.2), rgba(186, 71, 25, 0.07) 40%, transparent 65%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 40;
+  opacity: 0;
+}
+
+/* ---------- Encabezado ---------- */
+.top {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 18px clamp(18px, 4vw, 56px);
+  color: var(--tinta);
+  transition: color 0.5s;
+}
+.top .logo-mark {
+  width: 84px;
+  margin-right: auto;
+}
+.top nav {
+  display: flex;
+  gap: 28px;
+}
+.top nav a {
+  color: inherit;
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+.top nav a:hover {
+  opacity: 1;
+}
+body.claro .top {
+  color: var(--negro);
+}
+
+/* ---------- Hero: el encendido ---------- */
+.hero {
+  position: relative;
+  height: 100svh;
+  min-height: 620px;
+  overflow: hidden;
+  isolation: isolate;
+}
+.hero-logo {
+  position: absolute;
+  left: 50%;
+  top: 10svh;
+  width: min(72vw, 112svh);
+  -webkit-mask:
+    url(/logo.svg) center / contain no-repeat,
+    linear-gradient(#000 38%, transparent 72%);
+  -webkit-mask-composite: source-in;
+  mask:
+    url(/logo.svg) center / contain no-repeat,
+    linear-gradient(#000 38%, transparent 72%);
+  mask-composite: intersect;
+  translate: -50% 0;
+  color: var(--terracota);
+  opacity: 0;
+  z-index: 0;
+}
+.hero-figure {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  height: 94svh;
+  aspect-ratio: 851 / 1280;
+  translate: -50% 0;
+  z-index: 1;
+  transform-origin: var(--fx) var(--fy);
+}
+.fig {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.fig.dark {
+  filter: brightness(0.2) saturate(0.5) contrast(1.1);
+  opacity: 0;
+}
+.fig.lit {
+  filter: sepia(0.22) saturate(1.2) contrast(1.04);
+  -webkit-mask-image: radial-gradient(
+    circle at var(--fx) var(--fy),
+    #000 0%,
+    rgba(0, 0, 0, 0.9) calc(var(--r) * 0.34%),
+    rgba(0, 0, 0, 0.35) calc(var(--r) * 0.7%),
+    transparent calc(var(--r) * 1%)
+  );
+  mask-image: radial-gradient(
+    circle at var(--fx) var(--fy),
+    #000 0%,
+    rgba(0, 0, 0, 0.9) calc(var(--r) * 0.34%),
+    rgba(0, 0, 0, 0.35) calc(var(--r) * 0.7%),
+    transparent calc(var(--r) * 1%)
+  );
+}
+.glow {
+  position: absolute;
+  left: var(--fx);
+  top: var(--fy);
+  width: 120%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 190, 110, 0.5) 0%,
+    rgba(240, 122, 30, 0.2) 14%,
+    rgba(186, 71, 25, 0.1) 32%,
+    transparent 60%
+  );
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+}
+.spark {
+  position: absolute;
+  left: var(--fx);
+  top: var(--fy);
+  width: 9%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 0%, #ffd58a 25%, rgba(240, 122, 30, 0.4) 50%, transparent 70%);
+  mix-blend-mode: screen;
+  opacity: 0;
+}
+.flame {
+  position: absolute;
+  left: var(--fx);
+  top: var(--fy);
+  width: 3%;
+  translate: -50% -78%;
+  transform-origin: 50% 92%;
+  opacity: 0;
+  filter: drop-shadow(0 0 6px #ffb347) drop-shadow(0 0 18px rgba(240, 122, 30, 0.8));
+  mix-blend-mode: screen;
+}
+.embers {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.hero-copy,
+.hero-side {
+  position: absolute;
+  z-index: 3;
+  bottom: clamp(48px, 11svh, 120px);
+}
+.hero-copy {
+  left: clamp(18px, 5vw, 80px);
+  width: min(30vw, 480px);
+}
+.hero-side {
+  right: clamp(18px, 5vw, 80px);
+  width: min(24vw, 340px);
+}
+.h1 {
+  font-size: clamp(44px, 6.1vw, 104px);
+  font-style: italic;
+}
+.w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+.h1 .w > span {
+  display: inline-block;
+  opacity: 0;
+}
+.hero-side p {
+  margin: 0 0 22px;
+  color: color-mix(in srgb, var(--tinta) 82%, transparent);
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  translate: -50% 0;
+  z-index: 3;
+  margin: 0;
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--arena);
+}
+.scroll-hint::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 26px;
+  margin: 8px auto 0;
+  background: linear-gradient(var(--arena), transparent);
+  animation: gota 2.2s ease-in-out infinite;
+  transform-origin: top;
+}
+@keyframes gota {
+  0%,
+  100% {
+    scale: 1 0.3;
+    opacity: 0.4;
+  }
+  50% {
+    scale: 1 1;
+    opacity: 1;
+  }
+}
+
+/* Todo lo que aparece después del encendido arranca apagado */
+.late {
+  opacity: 0;
+}
+
+/* ---------- Manifiesto ---------- */
+.manifiesto {
+  position: relative;
+  padding: clamp(110px, 22svh, 240px) clamp(18px, 6vw, 96px) clamp(90px, 16svh, 180px);
+  text-align: center;
+}
+.manifiesto-texto {
+  font-size: clamp(46px, 9vw, 150px);
+  max-width: 11ch;
+  margin: 0 auto;
+}
+.manifiesto-texto .w {
+  opacity: 0.13;
+}
+.manifiesto-texto > span:nth-child(n + 3) {
+  font-style: italic;
+  color: var(--arena);
+}
+.hechos {
+  list-style: none;
+  padding: 0;
+  margin: clamp(70px, 12svh, 130px) auto 0;
+  max-width: 1040px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.hechos li {
+  border-top: 1px solid color-mix(in srgb, var(--arena) 35%, transparent);
+  padding-top: 22px;
+}
+.hechos strong {
+  display: block;
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 300;
+  font-size: clamp(24px, 2.6vw, 36px);
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+.hechos span {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--arena);
+}
+
+/* ---------- Aromas: cada vela cambia el clima ---------- */
+.aromas {
+  position: relative;
+  background-color: #2a2622;
+}
+.aromas::before,
+.aromas::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 22svh;
+  pointer-events: none;
+  z-index: 1;
+}
+.aromas::before {
+  top: 0;
+  background: linear-gradient(var(--negro), transparent);
+}
+.aromas::after {
+  bottom: 0;
+  background: linear-gradient(transparent, var(--negro));
+}
+.aromas-pin {
+  position: relative;
+  z-index: 2;
+  height: 100svh;
+  min-height: 640px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(20px, 4svh, 44px);
+  overflow: hidden;
+}
+.aromas-head {
+  padding: 0 clamp(18px, 5vw, 80px);
+}
+.aromas-head h2 {
+  font-size: clamp(34px, 4.6vw, 72px);
+}
+.aromas-head .eyebrow {
+  margin-bottom: 12px;
+}
+.track {
+  display: flex;
+  gap: clamp(18px, 3vw, 48px);
+  padding: 0 clamp(18px, 5vw, 80px);
+  width: max-content;
+  will-change: transform;
+}
+.vela {
+  width: clamp(250px, 23vw, 340px);
+  flex: none;
+  opacity: 0.45;
+  transition: opacity 0.6s;
+}
+.vela.activa {
+  opacity: 1;
+}
+.vela-foto {
+  position: relative;
+  aspect-ratio: 4 / 4.6;
+  max-height: 44svh;
+  width: 100%;
+  border-radius: 999px 999px 14px 14px;
+  overflow: hidden;
+  box-shadow: 0 0 0 0 transparent;
+  transition: box-shadow 0.8s;
+  margin-bottom: 18px;
+}
+.vela.activa .vela-foto {
+  box-shadow: 0 0 90px -18px var(--brillo);
+}
+.vela-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.86) sepia(0.12);
+  transition:
+    scale 1.2s cubic-bezier(0.2, 0.7, 0.2, 1),
+    filter 0.8s;
+}
+.vela.activa .vela-foto img {
+  filter: none;
+  scale: 1.05;
+}
+.vela-linea {
+  margin: 0 0 6px;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--brillo);
+}
+.vela h3 {
+  font-size: clamp(24px, 2.2vw, 32px);
+  line-height: 1.08;
+}
+.vela-detalle {
+  margin: 8px 0 14px;
+  font-size: 15px;
+  color: color-mix(in srgb, var(--tinta) 76%, transparent);
+  min-height: 3.1em;
+}
+.vela-pie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.vela-pie .btn {
+  min-height: 40px;
+  padding: 0 16px;
+  font-size: 10.5px;
+}
+.precio {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 24px;
+}
+
+/* ---------- Cómo comprar y cierre: ya es de día ---------- */
+.comprar {
+  position: relative;
+  background: var(--beige);
+  color: var(--negro);
+  padding: clamp(100px, 18svh, 200px) clamp(18px, 6vw, 96px) clamp(80px, 14svh, 160px);
+}
+.comprar::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: 34svh;
+  background: linear-gradient(transparent, var(--beige));
+  pointer-events: none;
+  z-index: 3;
+}
+.comprar .eyebrow,
+.comprar em {
+  color: var(--terracota);
+}
+.pasos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 4vw, 64px);
+}
+.pasos li {
+  border-top: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+  padding-top: 20px;
+}
+.num {
+  font-family: var(--font-display), Georgia, serif;
+  font-style: italic;
+  font-size: 64px;
+  line-height: 1;
+  color: var(--fuego);
+}
+.pasos h3 {
+  font-size: clamp(24px, 2.4vw, 34px);
+  margin: 14px 0 8px;
+}
+.pasos p {
+  margin: 0;
+  max-width: 30ch;
+}
+.cierre {
+  margin-top: clamp(100px, 18svh, 200px);
+  text-align: center;
+}
+.cierre h2 {
+  font-size: clamp(42px, 7.4vw, 124px);
+  max-width: 13ch;
+  margin: 0 auto 40px;
+}
+
+.pie {
+  background: var(--beige);
+  color: var(--negro);
+  padding: 40px clamp(18px, 6vw, 96px) 48px;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+.pie .logo-mark {
+  width: 120px;
+  color: var(--terracota);
+  margin-bottom: 8px;
+}
+.pie p {
+  margin: 0;
+}
+.pie .nota {
+  opacity: 0.6;
+  font-size: 12px;
+}
+
+/* ---------- Celular ---------- */
+@media (max-width: 860px) {
+  .top nav {
+    display: none;
+  }
+  .top .btn {
+    min-height: 38px;
+    padding: 0 14px;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+  }
+  .top .logo-mark {
+    width: 66px;
+  }
+  .hero-logo {
+    top: 20svh;
+    width: 118vw;
+  }
+  .hero-figure {
+    height: 80svh;
+  }
+  .hero-copy {
+    top: 11svh;
+    bottom: auto;
+    left: 18px;
+    right: 18px;
+    width: auto;
+    text-align: center;
+  }
+  .hero-copy .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    margin-bottom: 10px;
+  }
+  .h1 {
+    font-size: clamp(40px, 12.4vw, 60px);
+  }
+  .hero-side {
+    left: 18px;
+    right: 18px;
+    width: auto;
+    bottom: 46px;
+  }
+  .hero-side p {
+    display: none;
+  }
+  .hero-actions {
+    justify-content: center;
+  }
+  .scroll-hint {
+    display: none;
+  }
+  .halo {
+    display: none;
+  }
+  .hechos,
+  .pasos {
+    grid-template-columns: 1fr;
+  }
+  .aromas-pin {
+    height: auto;
+    min-height: 0;
+    padding: 18svh 0 16svh;
+  }
+  .track {
+    width: auto;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 18px;
+    padding-bottom: 12px;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar {
+    display: none;
+  }
+  .vela {
+    width: 76vw;
+    scroll-snap-align: center;
+  }
+  .vela-foto {
+    max-height: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-hint::after {
+    animation: none;
+  }
+  .late,
+  .fig.dark,
+  .glow {
+    opacity: 1;
+  }
+  .hero-logo {
+    opacity: 0.55;
+  }
+  .flame,
+  .h1 .w > span {
+    opacity: 1;
+  }
+  .manifiesto-texto .w,
+  .vela {
+    opacity: 1;
+  }
+}
