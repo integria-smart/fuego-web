@@ -1103,7 +1103,10 @@ body.claro .top {
     gap: 6px;
   }
   .cat-info .cat-resumen {
-    display: none;
+    display: block;
+    border: 0;
+    padding: 0;
+    margin-top: 8px;
   }
   .cat-pista {
     margin-right: -18px;
