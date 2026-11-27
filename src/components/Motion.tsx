@@ -58,10 +58,11 @@ export default function Motion() {
         });
         gsap.to(".glow", { opacity: gsap.utils.random(0.9, 1), duration: 0.9, overwrite: true });
         gsap.to(".flame", {
-          scaleY: gsap.utils.random(0.9, 1.14),
-          scaleX: gsap.utils.random(0.92, 1.05),
-          skewX: gsap.utils.random(-5, 5),
-          duration: 0.18,
+          scaleY: gsap.utils.random(0.94, 1.1),
+          scaleX: gsap.utils.random(0.95, 1.03),
+          skewX: gsap.utils.random(-3.5, 3.5),
+          duration: gsap.utils.random(0.5, 1.1),
+          ease: "sine.inOut",
           overwrite: "auto",
         });
       };
@@ -70,7 +71,7 @@ export default function Motion() {
       encender
         .to(".spark", { scale: 1, opacity: 1, duration: 0.14, ease: "power2.out" })
         .to(".spark", { scale: 2.2, opacity: 0, duration: 0.6, ease: "power2.out" })
-        .to(".flame", { scale: 1, duration: 1, ease: "elastic.out(1, 0.45)" }, "<0.05")
+        .to(".flame", { scale: 1, duration: 1.6, ease: "power2.out" }, "<0.05")
         // La luz sube despacio: primero las manos y la vela, luego el rostro.
         .to(figura, { "--r": 13, duration: 2.2, ease: "sine.out" }, "<")
         .to(".glow", { opacity: 1, duration: 3, ease: "sine.out" }, "<")
@@ -274,7 +275,7 @@ export default function Motion() {
     const hero = document.querySelector<HTMLElement>(".hero");
     if (lienzo && hero && !quieto) {
       const g = lienzo.getContext("2d");
-      const total = celular ? 22 : 64;
+      const total = celular ? 9 : 22;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       type Chispa = { x: number; y: number; vx: number; vy: number; r: number; vida: number; max: number };
       const chispas: Chispa[] = [];
@@ -297,16 +298,16 @@ export default function Motion() {
         };
       };
       const nacer = (c: Partial<Chispa> = {}): Chispa => {
-        // La mayoría nace en la llama; algunas flotan por toda la escena.
-        const deLlama = Math.random() < 0.6;
+        // Pocas chispas: alguna se desprende de la llama y el resto flota por la escena.
+        const deLlama = Math.random() < 0.22;
         return {
-          x: deLlama ? origen.x + gsap.utils.random(-10, 10) : Math.random() * ancho,
+          x: deLlama ? origen.x + gsap.utils.random(-3, 3) : Math.random() * ancho,
           y: deLlama ? origen.y : alto * gsap.utils.random(0.35, 1.05),
           vx: gsap.utils.random(-0.18, 0.18),
-          vy: -gsap.utils.random(0.25, deLlama ? 1.05 : 0.5),
-          r: gsap.utils.random(0.6, deLlama ? 2 : 1.5),
+          vy: -gsap.utils.random(0.18, deLlama ? 0.6 : 0.4),
+          r: gsap.utils.random(0.4, deLlama ? 1 : 1.2),
           vida: 0,
-          max: gsap.utils.random(160, 420),
+          max: deLlama ? gsap.utils.random(90, 180) : gsap.utils.random(200, 460),
           ...c,
         };
       };
@@ -315,13 +316,13 @@ export default function Motion() {
         if (!g || !visible || !encendida) return;
         g.setTransform(dpr, 0, 0, dpr, 0, 0);
         g.clearRect(0, 0, ancho, alto);
-        if (chispas.length < total && Math.random() < 0.25) chispas.push(nacer());
+        if (chispas.length < total && Math.random() < 0.05) chispas.push(nacer());
         chispas.forEach((c, i) => {
           c.vida += 1;
           c.x += c.vx + Math.sin((c.vida + i * 40) / 34) * 0.22;
           c.y += c.vy;
           const t = c.vida / c.max;
-          const a = Math.sin(Math.min(t, 1) * Math.PI) * 0.9;
+          const a = Math.sin(Math.min(t, 1) * Math.PI) * 0.6;
           const rad = c.r * 5;
           const grad = g.createRadialGradient(c.x, c.y, 0, c.x, c.y, rad);
           grad.addColorStop(0, `rgba(255, 214, 150, ${a})`);
