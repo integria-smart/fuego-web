@@ -536,6 +536,49 @@ body.claro .top {
   font-size: 24px;
 }
 
+/* ---------- Fotos de Mónica ---------- */
+.manifiesto-fotos {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: clamp(16px, 3vw, 44px);
+  margin: clamp(60px, 11svh, 120px) auto 0;
+  max-width: 880px;
+}
+.manifiesto-fotos img {
+  width: min(42%, 360px);
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 30%;
+  border-radius: 28px;
+  filter: sepia(0.1) brightness(0.96);
+}
+.manifiesto-fotos img:nth-child(2) {
+  margin-top: clamp(30px, 8svh, 90px);
+}
+.historia-foto {
+  display: block;
+  width: min(100%, 340px);
+  height: auto;
+  max-height: 44svh;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 18%;
+  border-radius: 28px;
+  margin-top: 32px;
+  filter: sepia(0.1) brightness(0.96);
+}
+.cierre-foto {
+  display: block;
+  width: min(340px, 68vw);
+  height: auto;
+  margin: 0 auto 8px;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: radial-gradient(ellipse 62% 60% at 50% 46%, #000 62%, transparent 100%);
+  mask-image: radial-gradient(ellipse 62% 60% at 50% 46%, #000 62%, transparent 100%);
+}
+
 /* ---------- Nuestra historia ---------- */
 .historia {
   position: relative;
@@ -548,7 +591,7 @@ body.claro .top {
 }
 .historia-titulo {
   position: sticky;
-  top: 22svh;
+  top: 13svh;
   align-self: start;
 }
 .historia-titulo h2 {
@@ -732,6 +775,10 @@ body.claro .top {
   }
   .historia-titulo {
     position: static;
+  }
+  .historia-foto {
+    max-height: none;
+    width: 100%;
   }
   .aromas-pin {
     height: auto;

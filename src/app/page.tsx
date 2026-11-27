@@ -96,6 +96,24 @@ export default function Home() {
           <h2 className="manifiesto-texto">
             <Palabras texto="Una llama pequeña basta para aquietar el día entero." />
           </h2>
+          <div className="manifiesto-fotos">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/img/monica-calma.webp"
+              alt="Mónica Ruiz mira con calma una vela encendida entre sus manos"
+              width={851}
+              height={1280}
+              loading="lazy"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/img/monica-detalle.webp"
+              alt="Mónica Ruiz sonríe y ofrece una vela Fuego con tapa de madera"
+              width={851}
+              height={1280}
+              loading="lazy"
+            />
+          </div>
           <ul className="hechos">
             <li>
               <strong>Cera de soja</strong>
@@ -161,6 +179,15 @@ export default function Home() {
               Hay luces que uno enciende <em>para no perderse</em>
             </h2>
             <p className="historia-firma">Mónica Ruiz</p>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className="historia-foto"
+              src="/img/monica-historia.webp"
+              alt="Mónica Ruiz, de chaqueta blanca, sonríe sentada en su estudio"
+              width={851}
+              height={1280}
+              loading="lazy"
+            />
           </div>
           <div className="historia-texto">
             <p>
@@ -223,6 +250,15 @@ export default function Home() {
           </ol>
 
           <div className="cierre">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className="cierre-foto"
+              src="/img/monica-ofrenda.webp"
+              alt="Mónica Ruiz ofrece hacia ti una vela Fuego encendida"
+              width={851}
+              height={1280}
+              loading="lazy"
+            />
             <h2>
               Enciende una, y deja que la calma <em>te encuentre</em>
             </h2>

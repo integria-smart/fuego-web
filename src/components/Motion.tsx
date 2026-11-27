@@ -149,6 +149,15 @@ export default function Motion() {
         scrollTrigger: { trigger: ".hechos", start: "top 86%" },
       });
 
+      gsap.from(".manifiesto-fotos img", {
+        y: 60,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.18,
+        ease: "power2.out",
+        scrollTrigger: { trigger: ".manifiesto-fotos", start: "top 84%" },
+      });
+
       // ---------- 3b. Historia: cada párrafo llega despacio ----------
       gsap.utils.toArray<HTMLElement>(".historia-texto > *").forEach((el) => {
         gsap.from(el, {
