@@ -16,10 +16,24 @@ const label = Jost({
   weight: ["300", "400", "500"],
 });
 
+const titulo = "Fuego · Velas artesanales by Mónica Ruiz";
+const descripcion =
+  "Que tu intención se haga luz. Velas artesanales, bouquets y recordatorios hechos a mano por Mónica Ruiz en Santander, Colombia.";
+
 export const metadata: Metadata = {
-  title: "Fuego · Velas artesanales by Mónica Ruiz",
-  description:
-    "Velas artesanales de cera de soja, bouquets y recordatorios personalizados. Hechos a mano en Santander, Colombia.",
+  // Cambiar por el dominio propio cuando la web deje de ser prototipo.
+  metadataBase: new URL("https://fuego-web-five.vercel.app"),
+  title: titulo,
+  description: descripcion,
+  openGraph: {
+    title: titulo,
+    description: descripcion,
+    siteName: "Fuego by Mónica Ruiz",
+    locale: "es_CO",
+    type: "website",
+    url: "/",
+  },
+  twitter: { card: "summary_large_image", title: titulo, description: descripcion },
 };
 
 export const viewport: Viewport = {
