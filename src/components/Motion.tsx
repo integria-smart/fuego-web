@@ -160,6 +160,17 @@ export default function Motion() {
         scrollTrigger: { trigger: ".manifiesto-fotos", start: "top 84%" },
       });
 
+      gsap.utils.toArray<HTMLElement>(".piezas").forEach((fila) => {
+        gsap.from(fila.children, {
+          y: 50,
+          opacity: 0,
+          duration: 1.1,
+          stagger: 0.14,
+          ease: "power2.out",
+          scrollTrigger: { trigger: fila, start: "top 84%" },
+        });
+      });
+
       // ---------- 3b. Historia: cada párrafo llega despacio ----------
       gsap.utils.toArray<HTMLElement>(".historia-texto > *").forEach((el) => {
         gsap.from(el, {

@@ -1,5 +1,27 @@
 import Motion from "@/components/Motion";
-import { linkWhatsApp, velas } from "@/lib/catalogo";
+import { bouquets, linkWhatsApp, recordatorios, velas, type Pieza } from "@/lib/catalogo";
+
+const Piezas = ({ lista, boton }: { lista: Pieza[]; boton: string }) => (
+  <div className="piezas">
+    {lista.map((p) => (
+      <article className="pieza" key={p.id}>
+        <div className="pieza-foto">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={p.foto} alt={p.nombre} loading="lazy" />
+        </div>
+        <p className="vela-linea">{p.linea}</p>
+        <h3>{p.nombre}</h3>
+        <p className="vela-detalle">{p.detalle}</p>
+        <div className="vela-pie">
+          <span className="precio">{p.precio}</span>
+          <a className="btn btn-line" href={linkWhatsApp(p.mensaje)} target="_blank" rel="noopener">
+            {boton}
+          </a>
+        </div>
+      </article>
+    ))}
+  </div>
+);
 
 const Palabras = ({ texto }: { texto: string }) => (
   <>
@@ -191,6 +213,32 @@ export default function Home() {
               ))}
             </div>
           </div>
+        </section>
+
+        <section className="regalos" id="bouquets">
+          <div className="regalos-head">
+            <p className="eyebrow">Bouquets de flores en vela</p>
+            <h2>
+              Flores que no se marchitan, <em>se encienden</em>
+            </h2>
+            <p className="regalos-nota">
+              Cada flor es una vela aromática hecha a mano. Tú eliges el tamaño, el aroma y los
+              colores, y llega con follaje, cerillo y una tarjeta con tus palabras.
+            </p>
+          </div>
+          <Piezas lista={bouquets} boton="Pedir bouquet" />
+
+          <div className="regalos-head regalos-segundo" id="recordatorios">
+            <p className="eyebrow">Recordatorios para eventos</p>
+            <h2>
+              Pequeños detalles <em>que se recuerdan</em>
+            </h2>
+            <p className="regalos-nota">
+              Para que tu celebración siga encendida en cada casa. Llevan tu color, tu aroma y tu
+              tarjeta, listos para regalar, con precio especial por docena.
+            </p>
+          </div>
+          <Piezas lista={recordatorios} boton="Cotizar" />
         </section>
 
         <section className="historia" id="historia">
