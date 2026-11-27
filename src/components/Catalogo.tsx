@@ -1,16 +1,21 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { bouquets, linkWhatsApp, velas, type Pieza } from "@/lib/catalogo";
 import {
-  bouquets,
-  industrial,
-  linkWhatsApp,
-  navidadArtesanal,
-  navidadIndustrial,
-  recordatorios,
-  velas,
-  type Pieza,
-} from "@/lib/catalogo";
+  aromas,
+  babyShower,
+  bautizos,
+  bodas,
+  corporales,
+  corporativos,
+  cumpleanos,
+  decorativas,
+  deseos,
+  navidadArtesanalCompleta,
+  navidadCorporativa,
+  waxmelts,
+} from "@/lib/catalogo-completo";
 
 /**
  * Catálogo interactivo: cuatro pestañas (una por línea) y, dentro de cada
@@ -60,11 +65,41 @@ const lineas: Linea[] = [
         id: "aromaticas",
         nombre: "Aromáticas",
         titulo: ["Cada aroma guarda", "una intención"],
-        nota: "Velas de cera natural para acompañar tus momentos de calma.",
+        nota: "Velas de cera de soja para acompañar tus momentos de calma.",
         boton: "Pedir este aroma",
         clima: "#2a2622",
         brillo: "#e9dcc6",
         lista: aromaticas,
+      },
+      {
+        id: "corporales",
+        nombre: "Corporales",
+        titulo: ["Una caricia tibia", "para tu piel"],
+        nota: "Velas que se derriten en una crema de manteca de karité y aceite de coco, para hidratar tu piel de forma natural.",
+        boton: "Pedir",
+        clima: "#2e2219",
+        brillo: "#d9b98f",
+        lista: corporales,
+      },
+      {
+        id: "waxmelts",
+        nombre: "Waxmelts y pebeteros",
+        titulo: ["El aroma también", "sabe decorar"],
+        nota: "Pastillas de cera de soya en más de veinte aromas y pebeteros de cerámica para encenderlas.",
+        boton: "Pedir",
+        clima: "#2b2320",
+        brillo: "#e7c56a",
+        lista: waxmelts,
+      },
+      {
+        id: "aromas",
+        nombre: "Aromas",
+        titulo: ["Fragancias que", "se quedan contigo"],
+        nota: "Aromas premium de larga duración para tu carro, tus linos y cada rincón de la casa.",
+        boton: "Pedir",
+        clima: "#22201f",
+        brillo: "#c19971",
+        lista: aromas,
       },
       {
         id: "bouquets",
@@ -77,33 +112,83 @@ const lineas: Linea[] = [
         lista: bouquets,
       },
       {
-        id: "recordatorios",
-        nombre: "Recordatorios",
-        titulo: ["Pequeños detalles", "que se recuerdan"],
-        nota: "Para que tu celebración siga encendida en cada casa, con tu color, tu aroma y tu tarjeta.",
+        id: "cumpleanos",
+        nombre: "Cumpleaños",
+        titulo: ["Un deseo para", "cada invitado"],
+        nota: "Recordatorios con tu color, tu aroma y tu tarjeta, listos para regalar.",
         boton: "Cotizar",
-        clima: "#2b2320",
-        brillo: "#e7c56a",
-        lista: recordatorios,
+        clima: "#33200f",
+        brillo: "#e08a3c",
+        lista: cumpleanos,
+      },
+      {
+        id: "bautizos",
+        nombre: "Bautizos",
+        titulo: ["Una luz que", "bendice el camino"],
+        nota: "Recordatorios con tu color, tu aroma y tu tarjeta, listos para regalar.",
+        boton: "Cotizar",
+        clima: "#262629",
+        brillo: "#cfd8e6",
+        lista: bautizos,
+      },
+      {
+        id: "baby-shower",
+        nombre: "Baby shower",
+        titulo: ["Pequeñas luces para", "una gran espera"],
+        nota: "Recordatorios con tu color, tu aroma y tu tarjeta, listos para regalar.",
+        boton: "Cotizar",
+        clima: "#22282b",
+        brillo: "#a9cfe0",
+        lista: babyShower,
+      },
+      {
+        id: "bodas",
+        nombre: "Bodas y quince",
+        titulo: ["Detalles para un día", "que no se olvida"],
+        nota: "Recordatorios con tu color, tu aroma y tu tarjeta, listos para regalar.",
+        boton: "Cotizar",
+        clima: "#2e1c20",
+        brillo: "#e6b3b8",
+        lista: bodas,
+      },
+      {
+        id: "decorativas",
+        nombre: "Decorativas",
+        titulo: ["Formas que dan vida", "a tus espacios"],
+        nota: "Velas para decorar, con el color y el aroma que elijas.",
+        boton: "Pedir",
+        clima: "#2f2422",
+        brillo: "#e3c4bb",
+        lista: decorativas,
       },
       {
         id: "navidad",
         nombre: "Navidad",
         titulo: ["Una Navidad", "encendida a mano"],
-        nota: "Nacimientos, figuras y huellitas para regalar en diciembre, con precio especial por docena.",
+        nota: "Nacimientos y huellitas para regalar en diciembre, con color, aroma y tarjeta a tu elección.",
         boton: "Cotizar",
         clima: "#351512",
         brillo: "#c8442c",
-        lista: navidadArtesanal,
+        lista: navidadArtesanalCompleta,
       },
     ],
   },
   {
-    id: "industrial",
+    id: "corporativa",
     num: "02",
-    nombre: "Línea industrial",
-    resumen: "Velas de deseos por caja, para la casa, el negocio y los pedidos grandes.",
+    nombre: "Línea corporativa",
+    resumen: "Detalles para empresas y pedidos grandes, con tu marca y tu mensaje.",
     grupos: [
+      {
+        id: "corporativos",
+        nombre: "Corporativos",
+        titulo: ["Detalles que hablan", "por tu marca"],
+        nota: "Pequeñas velas con tarjeta para clientes, equipos y fechas especiales, con precio por docena.",
+        boton: "Cotizar",
+        clima: "#2a1d14",
+        brillo: "#ba4719",
+        lista: corporativos,
+      },
       {
         id: "deseos",
         nombre: "Velas de deseos",
@@ -112,17 +197,17 @@ const lineas: Linea[] = [
         boton: "Pedir caja",
         clima: "#33200f",
         brillo: "#e08a3c",
-        lista: industrial,
+        lista: deseos,
       },
       {
         id: "navidad",
         nombre: "Navidad",
-        titulo: ["Diciembre", "por cajas"],
-        nota: "Para la noche de las velitas, la novena y los regalos de empresa, con tu logo y tu mensaje.",
+        titulo: ["Diciembre con", "tu logo y tu mensaje"],
+        nota: "Para la noche de las velitas, la novena y los regalos de empresa.",
         boton: "Cotizar",
         clima: "#351512",
         brillo: "#c8442c",
-        lista: navidadIndustrial,
+        lista: navidadCorporativa,
       },
     ],
   },
@@ -267,7 +352,11 @@ export default function Catalogo() {
             {grupo.titulo[0]} <em>{grupo.titulo[1]}</em>
           </h2>
           <p>{grupo.nota}</p>
-          {linea.resumen && <p className="cat-resumen">{linea.resumen}</p>}
+          {grupo.lista.length > 3 ? (
+            <p className="cat-resumen">{grupo.lista.length} piezas en esta colección. Desliza para verlas todas.</p>
+          ) : (
+            linea.resumen && <p className="cat-resumen">{linea.resumen}</p>
+          )}
         </div>
 
         {linea.invitacion ? (
