@@ -68,13 +68,13 @@ export default function Home() {
           <div className="hero-copy">
             <p className="eyebrow late">Velas artesanales · Santander, Colombia</p>
             <h1 className="h1">
-              <Palabras texto="Aromatiza tus espacios" />
+              <Palabras texto="Enciende tu intención" />
             </h1>
           </div>
           <div className="hero-side">
             <p className="late">
-              Velas de cera de soja, bouquets y recordatorios hechos a mano por Mónica Ruiz. Cada
-              pieza se personaliza para ti.
+              Velas de cera de soja hechas a mano por Mónica Ruiz. Elige tu aroma, ponle una
+              intención y deja que su luz te devuelva la calma.
             </p>
             <div className="hero-actions late">
               <a className="btn btn-fire" href="#aromas">
