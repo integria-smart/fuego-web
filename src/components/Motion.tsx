@@ -51,12 +51,12 @@ export default function Motion() {
       const parpadeo = () => {
         // La llama nunca se queda quieta: radio de luz, brillo y forma varían un poco.
         gsap.to(figura, {
-          "--r": gsap.utils.random(88, 96),
-          duration: gsap.utils.random(0.12, 0.5),
+          "--r": gsap.utils.random(90, 94),
+          duration: gsap.utils.random(0.9, 1.8),
           ease: "sine.inOut",
           onComplete: parpadeo,
         });
-        gsap.to(".glow", { opacity: gsap.utils.random(0.78, 1), duration: 0.2, overwrite: true });
+        gsap.to(".glow", { opacity: gsap.utils.random(0.9, 1), duration: 0.9, overwrite: true });
         gsap.to(".flame", {
           scaleY: gsap.utils.random(0.9, 1.14),
           scaleX: gsap.utils.random(0.92, 1.05),
@@ -71,13 +71,14 @@ export default function Motion() {
         .to(".spark", { scale: 1, opacity: 1, duration: 0.14, ease: "power2.out" })
         .to(".spark", { scale: 2.2, opacity: 0, duration: 0.6, ease: "power2.out" })
         .to(".flame", { scale: 1, duration: 1, ease: "elastic.out(1, 0.45)" }, "<0.05")
-        .to(figura, { "--r": 46, duration: 1.3, ease: "power2.out" }, "<")
-        .to(".glow", { opacity: 1, duration: 1.4, ease: "power2.out" }, "<")
-        .to(".fig.dark", { opacity: 1, duration: 2.2, ease: "power1.out" }, "<0.2")
+        // La luz sube despacio: primero las manos y la vela, luego el rostro.
+        .to(figura, { "--r": 13, duration: 2.2, ease: "sine.out" }, "<")
+        .to(".glow", { opacity: 1, duration: 3, ease: "sine.out" }, "<")
+        .to(".fig.dark", { opacity: 1, duration: 3.4, ease: "sine.out" }, "<0.2")
         .add(() => {
           encendida = true;
         }, "<0.4")
-        .to(figura, { "--r": 92, duration: 2.2, ease: "power1.inOut" }, ">-1.4")
+        .to(figura, { "--r": 92, duration: 6.5, ease: "sine.inOut" }, ">-2.4")
         .to(".hero-logo", { opacity: 0.5, duration: 2.4, ease: "power1.out" }, "<")
         .to(
           ".h1 .w > span",
