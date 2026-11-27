@@ -29,7 +29,13 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="es" className={`${display.variable} ${label.variable}`}>
-      <body>{children}</body>
+      <body>
+        {/* Sin JavaScript no hay encendido: se muestra la página ya iluminada. */}
+        <noscript>
+          <style>{`.late,.fig.dark,.glow,.flame,.h1 .w>span,.manifiesto-texto .w,.vela{opacity:1}.hero-logo{opacity:.5}.hero-figure{--r:92!important}`}</style>
+        </noscript>
+        {children}
+      </body>
     </html>
   );
 }
