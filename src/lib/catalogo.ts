@@ -161,3 +161,93 @@ export const recordatorios: Pieza[] = [
     mensaje: "Hola Fuego, quiero cotizar recordatorios de baby shower.",
   },
 ];
+
+export const navidadArtesanal: Pieza[] = [
+  {
+    id: "nav-nacimiento",
+    nombre: "Nacimientos",
+    linea: "Color y tarjeta a elección",
+    detalle: "El pesebre entero cabe en una llama pequeña.",
+    precio: "Desde $6.000",
+    foto: "/img/nav-nacimiento.webp",
+    mensaje: "Hola Fuego, quiero cotizar nacimientos navideños.",
+  },
+  {
+    id: "nav-figuras",
+    nombre: "Figuras navideñas",
+    linea: "Árbol, galleta, Merry Christmas",
+    detalle: "La Navidad hecha vela, con tu tarjeta y tu mensaje.",
+    precio: "Desde $5.000",
+    foto: "/img/nav-figuras.webp",
+    mensaje: "Hola Fuego, quiero cotizar figuras navideñas.",
+  },
+  {
+    id: "nav-huellitas",
+    nombre: "Huellitas navideñas",
+    linea: "Color, aroma y nombre",
+    detalle: "Para quienes celebran con patitas en la casa.",
+    precio: "Desde $6.000",
+    foto: "/img/nav-huellitas.webp",
+    mensaje: "Hola Fuego, quiero cotizar huellitas navideñas.",
+  },
+];
+
+export const industrial: Pieza[] = [
+  {
+    id: "ind-ondulada",
+    nombre: "Vela ondulada",
+    linea: "Caja x 7 · blanca o de colores",
+    detalle: "Siete deseos escritos en dorado, uno para cada día.",
+    precio: "$35.000",
+    foto: "/img/ind-ondulada.webp",
+    mensaje: "Hola Fuego, quiero pedir la caja de velas onduladas ($35.000).",
+  },
+  {
+    id: "ind-baby",
+    nombre: "Vela baby",
+    linea: "Caja x 8 · blanca o pastel",
+    detalle: "Ocho luces pequeñas con el deseo que tú elijas.",
+    precio: "$20.000",
+    foto: "/img/ind-baby.webp",
+    mensaje: "Hola Fuego, quiero pedir la caja de velas baby ($20.000).",
+  },
+  {
+    id: "ind-cuadrada",
+    nombre: "Vela cuadrada",
+    linea: "Caja x 7 · letra en relieve",
+    detalle: "Familia, amor, abundancia: tus deseos tallados en cera.",
+    precio: "$28.000",
+    foto: "/img/ind-cuadrada.webp",
+    mensaje: "Hola Fuego, quiero pedir la caja de velas cuadradas ($28.000).",
+  },
+];
+
+export const navidadIndustrial: Pieza[] = [
+  {
+    id: "nav-baby",
+    nombre: "Vela baby navideña",
+    linea: "Caja x 8 · deseos surtidos",
+    detalle: "La novena, la cena y los deseos de fin de año.",
+    precio: "$20.000",
+    foto: "/img/nav-baby.webp",
+    mensaje: "Hola Fuego, quiero pedir la caja de velas baby navideñas ($20.000).",
+  },
+  {
+    id: "nav-virgencitas",
+    nombre: "Vela baby virgencitas",
+    linea: "Caja x 8 · bolsa x 3 desde $7.000",
+    detalle: "Una luz para cada noche de velitas.",
+    precio: "$20.000",
+    foto: "/img/nav-virgencitas.webp",
+    mensaje: "Hola Fuego, quiero pedir velas baby de virgencitas.",
+  },
+  {
+    id: "nav-corporativa",
+    nombre: "Corporativas navideñas",
+    linea: "Con tu logo, tarjeta y mensaje",
+    detalle: "El detalle de tu empresa, encendido en cada hogar.",
+    precio: "Desde $5.000",
+    foto: "/img/nav-corporativa.webp",
+    mensaje: "Hola Fuego, quiero cotizar velas corporativas navideñas.",
+  },
+];
