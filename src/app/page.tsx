@@ -68,13 +68,13 @@ export default function Home() {
           <div className="hero-copy">
             <p className="eyebrow late">Velas artesanales · Santander, Colombia</p>
             <h1 className="h1">
-              <Palabras texto="Enciende tu intención" />
+              <Palabras texto="Que tu intención se haga luz" />
             </h1>
           </div>
           <div className="hero-side">
             <p className="late">
-              Velas de cera de soja hechas a mano por Mónica Ruiz. Elige tu aroma, ponle una
-              intención y deja que su luz te devuelva la calma.
+              Cada vela nace en las manos de Mónica Ruiz y guarda un deseo por cumplir. Elige su
+              aroma, susúrrale tu intención y deja que su luz te devuelva la calma.
             </p>
             <div className="hero-actions late">
               <a className="btn btn-fire" href="#aromas">
@@ -91,9 +91,9 @@ export default function Home() {
         </section>
 
         <section className="manifiesto">
-          <p className="eyebrow">Hecho a mano, sin prisa</p>
+          <p className="eyebrow">Hechas a mano, sin prisa</p>
           <h2 className="manifiesto-texto">
-            <Palabras texto="Pequeños detalles que se recuerdan." />
+            <Palabras texto="Una llama pequeña basta para aquietar el día entero." />
           </h2>
           <ul className="hechos">
             <li>
@@ -116,7 +116,7 @@ export default function Home() {
             <div className="aromas-head">
               <p className="eyebrow">Velas aromáticas</p>
               <h2>
-                Cada aroma tiene <em>su clima</em>
+                Cada aroma guarda <em>una intención</em>
               </h2>
             </div>
             <div className="track">
@@ -159,23 +159,23 @@ export default function Home() {
             <li>
               <span className="num">1</span>
               <h3>Escríbenos</h3>
-              <p>Cuéntanos por WhatsApp o Instagram qué referencia te gustó.</p>
+              <p>Cuéntanos por WhatsApp o Instagram qué vela te hizo suspirar.</p>
             </li>
             <li>
               <span className="num">2</span>
               <h3>Abona el 50%</h3>
-              <p>Con el abono aseguramos tu pedido y empezamos a hacerlo.</p>
+              <p>Con el abono guardamos tu lugar y tu vela empieza a nacer.</p>
             </li>
             <li>
               <span className="num">3</span>
-              <h3>Recíbelo listo para regalar</h3>
-              <p>Hecho a mano, con tu aroma, tu color y tu tarjeta.</p>
+              <h3>Recíbela lista para encender</h3>
+              <p>Llega con tu aroma, tu color y unas palabras escritas para ti.</p>
             </li>
           </ol>
 
           <div className="cierre">
             <h2>
-              Creamos momentos <em>que se recuerdan</em>
+              Enciende una, y deja que la calma <em>te encuentre</em>
             </h2>
             <a className="btn btn-dark" href={waGeneral} target="_blank" rel="noopener">
               Pedir por WhatsApp
