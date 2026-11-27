@@ -458,6 +458,11 @@ body.claro .top {
   overflow: hidden;
   scroll-margin-top: 0;
 }
+@media (min-width: 861px) {
+  .cat {
+    padding-right: max(clamp(18px, 6vw, 96px), 110px);
+  }
+}
 .cat::before,
 .cat::after {
   content: "";
@@ -907,6 +912,95 @@ body.claro .top {
   font-size: 12px;
 }
 
+/* ---------- WhatsApp: una brasa siempre encendida ---------- */
+.wa-brasa {
+  position: fixed;
+  right: clamp(16px, 2.4vw, 34px);
+  bottom: clamp(16px, 2.4vw, 34px);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  animation: brasa-llega 1.4s ease 2.6s both;
+}
+.wa-circulo {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--tinta);
+  background: radial-gradient(circle at 50% 68%, #f0a04a 0%, var(--fuego) 42%, var(--terracota) 100%);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, #f0a04a 45%, transparent),
+    0 0 26px 2px color-mix(in srgb, var(--fuego) 70%, transparent),
+    0 10px 26px -8px rgb(0 0 0 / 0.6);
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.wa-circulo::before {
+  content: "";
+  position: absolute;
+  inset: -9px;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--fuego) 55%, transparent), transparent 68%);
+  z-index: -1;
+  animation: brasa-respira 3.2s ease-in-out infinite;
+}
+.wa-circulo svg {
+  width: 30px;
+  height: 30px;
+}
+.wa-brasa:hover .wa-circulo {
+  transform: scale(1.08);
+}
+.wa-texto {
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--negro) 88%, transparent);
+  border: 1px solid color-mix(in srgb, var(--arena) 40%, transparent);
+  color: var(--tinta);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateX(10px);
+  pointer-events: none;
+  transition:
+    opacity 0.4s,
+    transform 0.4s;
+}
+.wa-brasa:hover .wa-texto,
+.wa-brasa:focus-visible .wa-texto {
+  opacity: 1;
+  transform: none;
+}
+.wa-brasa:focus-visible {
+  outline: none;
+}
+.wa-brasa:focus-visible .wa-circulo {
+  outline: 2px solid var(--tinta);
+  outline-offset: 4px;
+}
+@keyframes brasa-respira {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.94);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.22);
+  }
+}
+@keyframes brasa-llega {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
 /* ---------- Celular ---------- */
 @media (max-width: 860px) {
   .top nav {
@@ -1031,6 +1125,16 @@ body.claro .top {
   .cat-flechas {
     display: none;
   }
+  .wa-texto {
+    display: none;
+  }
+  .hero-side {
+    bottom: 88px;
+  }
+  .wa-circulo {
+    width: 52px;
+    height: 52px;
+  }
   .cat-invitacion {
     margin-top: 22px;
   }
@@ -1052,6 +1156,8 @@ body.claro .top {
   .h1 .w > span {
     opacity: 1;
   }
+  .wa-brasa,
+  .wa-circulo::before,
   .cat-pieza,
   .cat-info > *,
   .cat-invitacion {
