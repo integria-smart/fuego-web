@@ -49,19 +49,40 @@ export default function Home() {
             />
             <div className="glow" aria-hidden="true" />
             <div className="spark" aria-hidden="true" />
-            <svg className="flame" viewBox="0 0 40 64" aria-hidden="true">
+            <svg className="flame" viewBox="0 0 40 72" aria-hidden="true">
               <defs>
-                <radialGradient id="fl" cx="50%" cy="78%" r="70%">
-                  <stop offset="0" stopColor="#fff6d8" />
-                  <stop offset=".35" stopColor="#ffc56a" />
-                  <stop offset=".75" stopColor="#f07a1e" />
-                  <stop offset="1" stopColor="#ba4719" stopOpacity="0" />
+                <linearGradient id="fl-ext" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stopColor="#ff8a1e" stopOpacity="0" />
+                  <stop offset=".22" stopColor="#ff9a2e" stopOpacity=".75" />
+                  <stop offset=".6" stopColor="#ffc35a" />
+                  <stop offset=".9" stopColor="#ffb44a" stopOpacity=".85" />
+                  <stop offset="1" stopColor="#f08a2a" stopOpacity=".35" />
+                </linearGradient>
+                <radialGradient id="fl-int" cx="50%" cy="68%" r="62%">
+                  <stop offset="0" stopColor="#fffdf2" />
+                  <stop offset=".5" stopColor="#fff0b8" />
+                  <stop offset="1" stopColor="#ffd070" stopOpacity="0" />
                 </radialGradient>
+                <radialGradient id="fl-base" cx="50%" cy="50%" r="50%">
+                  <stop offset="0" stopColor="#7fb2ff" stopOpacity=".75" />
+                  <stop offset="1" stopColor="#3f6fe0" stopOpacity="0" />
+                </radialGradient>
+                <filter id="fl-suave" x="-30%" y="-10%" width="160%" height="120%">
+                  <feGaussianBlur stdDeviation="1.1" />
+                </filter>
               </defs>
-              <path
-                d="M20 2c3 12 14 20 14 36a14 14 0 0 1-28 0C6 26 15 18 20 2z"
-                fill="url(#fl)"
-              />
+              <g filter="url(#fl-suave)">
+                <path
+                  d="M20 3C22 17 31 30 31 46a11 13 0 0 1-22 0C9 30 18 17 20 3z"
+                  fill="url(#fl-ext)"
+                />
+                <path
+                  d="M20 22c1.4 9 6 16 6 25a6 8 0 0 1-12 0c0-9 4.6-16 6-25z"
+                  fill="url(#fl-int)"
+                />
+                <ellipse cx="20" cy="57" rx="7" ry="4.5" fill="url(#fl-base)" />
+              </g>
+              <path d="M20 66v-9" stroke="#2a1a14" strokeWidth="1.3" strokeLinecap="round" />
             </svg>
           </div>
           <canvas className="embers" aria-hidden="true" />
