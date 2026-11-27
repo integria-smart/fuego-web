@@ -149,6 +149,17 @@ export default function Motion() {
         scrollTrigger: { trigger: ".hechos", start: "top 86%" },
       });
 
+      // ---------- 3b. Historia: cada párrafo llega despacio ----------
+      gsap.utils.toArray<HTMLElement>(".historia-texto > *").forEach((el) => {
+        gsap.from(el, {
+          y: 34,
+          opacity: 0,
+          duration: 1.1,
+          ease: "power2.out",
+          scrollTrigger: { trigger: el, start: "top 88%" },
+        });
+      });
+
       // ---------- 4. Aromas: galería horizontal y cambio de clima ----------
       const seccion = document.querySelector<HTMLElement>(".aromas");
       const pista = document.querySelector<HTMLElement>(".track");
