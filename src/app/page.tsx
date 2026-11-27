@@ -24,7 +24,7 @@ export default function Home() {
       <header className="top late">
         <a href="#inicio" className="logo-mark" aria-label="Fuego by Mónica Ruiz" />
         <nav aria-label="Principal">
-          <a href="#aromas">Velas</a>
+          <a href="#aromas">Catálogo</a>
           <a href="#historia">Nuestra historia</a>
           <a href="#comprar">Cómo comprar</a>
         </nav>
