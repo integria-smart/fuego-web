@@ -537,6 +537,88 @@ body.claro .top {
   font-size: 24px;
 }
 
+/* ---------- Líneas del catálogo ---------- */
+.linea {
+  padding: clamp(40px, 8svh, 90px) clamp(18px, 6vw, 96px) clamp(50px, 9svh, 100px);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.lineas-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: clamp(50px, 9svh, 100px);
+}
+.lineas-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid color-mix(in srgb, var(--arena) 45%, transparent);
+  border-radius: 999px;
+  color: var(--tinta);
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition:
+    background 0.4s,
+    color 0.4s;
+}
+.lineas-nav a:hover {
+  background: var(--arena);
+  color: var(--negro);
+}
+.linea-titulo {
+  border-top: 1px solid color-mix(in srgb, var(--arena) 35%, transparent);
+  padding-top: clamp(24px, 4svh, 44px);
+  margin-bottom: clamp(50px, 9svh, 100px);
+}
+.linea .linea-titulo {
+  margin-bottom: 0;
+}
+.linea-num {
+  display: block;
+  font-family: var(--font-display), Georgia, serif;
+  font-style: italic;
+  font-size: 22px;
+  color: var(--fuego);
+  margin-bottom: 10px;
+}
+.linea-titulo h2,
+.linea-tarjeta h2 {
+  font-size: clamp(46px, 7.4vw, 120px);
+}
+.linea-titulo em,
+.linea-tarjeta em {
+  color: var(--arena);
+}
+.linea-titulo p,
+.linea-tarjeta p {
+  margin: 18px 0 0;
+  font-size: clamp(16px, 1.3vw, 20px);
+  line-height: 1.7;
+  max-width: 48ch;
+  color: color-mix(in srgb, var(--tinta) 80%, transparent);
+}
+.lineas-extra {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 3vw, 48px);
+}
+.linea-tarjeta {
+  border: 1px solid color-mix(in srgb, var(--arena) 30%, transparent);
+  border-radius: 28px;
+  padding: clamp(28px, 4vw, 56px);
+  background: color-mix(in srgb, var(--arena) 5%, transparent);
+}
+.linea-tarjeta h2 {
+  font-size: clamp(38px, 4.6vw, 72px);
+}
+.linea-tarjeta .btn {
+  margin-top: 28px;
+}
+
 /* ---------- Bouquets y recordatorios ---------- */
 .regalos {
   position: relative;
@@ -836,6 +918,9 @@ body.claro .top {
   .piezas {
     grid-template-columns: 1fr;
     gap: 44px;
+  }
+  .lineas-extra {
+    grid-template-columns: 1fr;
   }
   .pieza:nth-child(2) {
     margin-top: 0;
