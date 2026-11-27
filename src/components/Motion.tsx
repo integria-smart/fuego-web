@@ -275,7 +275,7 @@ export default function Motion() {
     const hero = document.querySelector<HTMLElement>(".hero");
     if (lienzo && hero && !quieto) {
       const g = lienzo.getContext("2d");
-      const total = celular ? 9 : 22;
+      const total = celular ? 13 : 32;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       type Chispa = { x: number; y: number; vx: number; vy: number; r: number; vida: number; max: number };
       const chispas: Chispa[] = [];
@@ -316,7 +316,7 @@ export default function Motion() {
         if (!g || !visible || !encendida) return;
         g.setTransform(dpr, 0, 0, dpr, 0, 0);
         g.clearRect(0, 0, ancho, alto);
-        if (chispas.length < total && Math.random() < 0.05) chispas.push(nacer());
+        if (chispas.length < total && Math.random() < 0.08) chispas.push(nacer());
         chispas.forEach((c, i) => {
           c.vida += 1;
           c.x += c.vx + Math.sin((c.vida + i * 40) / 34) * 0.22;
