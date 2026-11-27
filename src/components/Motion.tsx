@@ -160,17 +160,6 @@ export default function Motion() {
         scrollTrigger: { trigger: ".manifiesto-fotos", start: "top 84%" },
       });
 
-      gsap.utils.toArray<HTMLElement>(".piezas").forEach((fila) => {
-        gsap.from(fila.children, {
-          y: 50,
-          opacity: 0,
-          duration: 1.1,
-          stagger: 0.14,
-          ease: "power2.out",
-          scrollTrigger: { trigger: fila, start: "top 84%" },
-        });
-      });
-
       // ---------- 3b. Historia: cada párrafo llega despacio ----------
       gsap.utils.toArray<HTMLElement>(".historia-texto > *").forEach((el) => {
         gsap.from(el, {
@@ -181,73 +170,6 @@ export default function Motion() {
           scrollTrigger: { trigger: el, start: "top 88%" },
         });
       });
-
-      // ---------- 4. Aromas: galería horizontal y cambio de clima ----------
-      const seccion = document.querySelector<HTMLElement>(".aromas");
-      const pista = document.querySelector<HTMLElement>(".track");
-      const velas = gsap.utils.toArray<HTMLElement>(".vela");
-      let activa = -1;
-      const activar = (i: number) => {
-        if (i === activa || !velas[i] || !seccion) return;
-        activa = i;
-        velas.forEach((v, n) => v.classList.toggle("activa", n === i));
-        gsap.to(seccion, {
-          backgroundColor: velas[i].dataset.clima,
-          duration: 0.9,
-          ease: "power2.out",
-          overwrite: "auto",
-        });
-      };
-      const masCentrada = () => {
-        const centro = window.innerWidth / 2;
-        let mejor = 0;
-        let dist = Infinity;
-        velas.forEach((v, i) => {
-          const b = v.getBoundingClientRect();
-          const d = Math.abs(b.left + b.width / 2 - centro);
-          if (d < dist) {
-            dist = d;
-            mejor = i;
-          }
-        });
-        activar(mejor);
-      };
-
-      if (seccion && pista) {
-        if (celular) {
-          pista.addEventListener("scroll", masCentrada, { passive: true });
-          limpiar.push(() => pista.removeEventListener("scroll", masCentrada));
-          masCentrada();
-        } else {
-          // La primera vela arranca al centro y la última termina al centro.
-          const borde = () => {
-            const primera = velas[0];
-            return window.innerWidth / 2 - primera.offsetLeft - primera.offsetWidth / 2;
-          };
-          const fin = () => {
-            const ultima = velas[velas.length - 1];
-            return window.innerWidth / 2 - ultima.offsetLeft - ultima.offsetWidth / 2;
-          };
-          gsap.fromTo(
-            pista,
-            { x: borde },
-            {
-              x: fin,
-              ease: "none",
-              scrollTrigger: {
-                trigger: ".aromas-pin",
-                start: "top top",
-                end: () => "+=" + Math.abs(fin() - borde()) * 1.15,
-                pin: true,
-                scrub: 0.6,
-                invalidateOnRefresh: true,
-                onUpdate: masCentrada,
-                onRefresh: masCentrada,
-              },
-            },
-          );
-        }
-      }
 
       // ---------- 5. De oscuro a claro ----------
       // El encabezado cambia de tinta al llegar a la zona clara y se esconde al bajar.

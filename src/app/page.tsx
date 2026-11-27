@@ -1,36 +1,6 @@
 import Motion from "@/components/Motion";
-import {
-  bouquets,
-  industrial,
-  linkWhatsApp,
-  navidadArtesanal,
-  navidadIndustrial,
-  recordatorios,
-  velas,
-  type Pieza,
-} from "@/lib/catalogo";
-
-const Piezas = ({ lista, boton }: { lista: Pieza[]; boton: string }) => (
-  <div className="piezas">
-    {lista.map((p) => (
-      <article className="pieza" key={p.id}>
-        <div className="pieza-foto">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={p.foto} alt={p.nombre} loading="lazy" />
-        </div>
-        <p className="vela-linea">{p.linea}</p>
-        <h3>{p.nombre}</h3>
-        <p className="vela-detalle">{p.detalle}</p>
-        <div className="vela-pie">
-          <span className="precio">{p.precio}</span>
-          <a className="btn btn-line" href={linkWhatsApp(p.mensaje)} target="_blank" rel="noopener">
-            {boton}
-          </a>
-        </div>
-      </article>
-    ))}
-  </div>
-);
+import Catalogo from "@/components/Catalogo";
+import { linkWhatsApp } from "@/lib/catalogo";
 
 const Palabras = ({ texto }: { texto: string }) => (
   <>
@@ -130,7 +100,7 @@ export default function Home() {
               aroma, susúrrale tu intención y deja que su luz te devuelva la calma.
             </p>
             <div className="hero-actions late">
-              <a className="btn btn-fire" href="#aromas">
+              <a className="btn btn-fire" href="#catalogo">
                 Ver las velas
               </a>
               <a className="btn btn-line" href={waGeneral} target="_blank" rel="noopener">
@@ -182,164 +152,7 @@ export default function Home() {
           </ul>
         </section>
 
-        <section className="linea" id="catalogo">
-          <p className="eyebrow">Catálogo</p>
-          <nav className="lineas-nav" aria-label="Líneas del catálogo">
-            <a href="#linea-artesanal">Línea artesanal</a>
-            <a href="#linea-industrial">Línea industrial</a>
-            <a href="#moldes-3d">Moldes en 3D</a>
-            <a href="#academia">Academia</a>
-          </nav>
-          <div className="linea-titulo" id="linea-artesanal">
-            <span className="linea-num">01</span>
-            <h2>
-              Línea <em>artesanal</em>
-            </h2>
-            <p>Piezas hechas una por una, con el tiempo y el cariño que pide cada intención.</p>
-          </div>
-        </section>
-
-        <section className="aromas" id="aromas">
-          <div className="aromas-pin">
-            <div className="aromas-head">
-              <p className="eyebrow">Velas aromáticas</p>
-              <h2>
-                Cada aroma guarda <em>una intención</em>
-              </h2>
-            </div>
-            <div className="track">
-              {velas.map((v) => (
-                <article
-                  className="vela"
-                  key={v.id}
-                  data-clima={v.clima}
-                  style={{ "--brillo": v.brillo } as React.CSSProperties}
-                >
-                  <div className="vela-foto">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={v.foto} alt={`Vela ${v.nombre}`} loading="lazy" />
-                  </div>
-                  <p className="vela-linea">{v.linea}</p>
-                  <h3>{v.nombre}</h3>
-                  <p className="vela-detalle">{v.detalle}</p>
-                  <div className="vela-pie">
-                    <span className="precio">{v.precio}</span>
-                    <a
-                      className="btn btn-line"
-                      href={linkWhatsApp(
-                        `Hola Fuego, quiero pedir la vela ${v.nombre} (${v.linea}, ${v.precio}).`,
-                      )}
-                      target="_blank"
-                      rel="noopener"
-                    >
-                      Pedir este aroma
-                    </a>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="regalos" id="bouquets">
-          <div className="regalos-head">
-            <p className="eyebrow">Bouquets de flores en vela</p>
-            <h2>
-              Flores que no se marchitan, <em>se encienden</em>
-            </h2>
-            <p className="regalos-nota">
-              Cada flor es una vela aromática hecha a mano. Tú eliges el tamaño, el aroma y los
-              colores, y llega con follaje, cerillo y una tarjeta con tus palabras.
-            </p>
-          </div>
-          <Piezas lista={bouquets} boton="Pedir bouquet" />
-
-          <div className="regalos-head regalos-segundo" id="recordatorios">
-            <p className="eyebrow">Recordatorios para eventos</p>
-            <h2>
-              Pequeños detalles <em>que se recuerdan</em>
-            </h2>
-            <p className="regalos-nota">
-              Para que tu celebración siga encendida en cada casa. Llevan tu color, tu aroma y tu
-              tarjeta, listos para regalar, con precio especial por docena.
-            </p>
-          </div>
-          <Piezas lista={recordatorios} boton="Cotizar" />
-
-          <div className="regalos-head regalos-segundo" id="navidad-artesanal">
-            <p className="eyebrow">Navidad · línea artesanal</p>
-            <h2>
-              Una Navidad <em>encendida a mano</em>
-            </h2>
-            <p className="regalos-nota">
-              Nacimientos, figuras y huellitas para regalar en diciembre, con color, aroma y
-              tarjeta a tu elección y precio especial por docena.
-            </p>
-          </div>
-          <Piezas lista={navidadArtesanal} boton="Cotizar" />
-        </section>
-
-        <section className="regalos" id="linea-industrial">
-          <div className="linea-titulo">
-            <span className="linea-num">02</span>
-            <h2>
-              Línea <em>industrial</em>
-            </h2>
-            <p>Velas de deseos por caja, para la casa, el negocio y los pedidos grandes.</p>
-          </div>
-          <div className="regalos-head">
-            <p className="eyebrow">Velas de deseos</p>
-            <h2>
-              Un deseo <em>en cada vela</em>
-            </h2>
-          </div>
-          <Piezas lista={industrial} boton="Pedir caja" />
-
-          <div className="regalos-head regalos-segundo" id="navidad-industrial">
-            <p className="eyebrow">Navidad · línea industrial</p>
-            <h2>
-              Diciembre <em>por cajas</em>
-            </h2>
-            <p className="regalos-nota">
-              Para la noche de las velitas, la novena y los regalos de empresa, con tu logo y tu
-              mensaje.
-            </p>
-          </div>
-          <Piezas lista={navidadIndustrial} boton="Cotizar" />
-        </section>
-
-        <section className="regalos lineas-extra">
-          <article className="linea-tarjeta" id="moldes-3d">
-            <span className="linea-num">03</span>
-            <h2>
-              Moldes <em>en 3D</em>
-            </h2>
-            <p>Formas diseñadas a medida para que tu vela no se parezca a ninguna otra.</p>
-            <a
-              className="btn btn-line"
-              href={linkWhatsApp("Hola Fuego, quiero saber más sobre los moldes en 3D.")}
-              target="_blank"
-              rel="noopener"
-            >
-              Quiero saber más
-            </a>
-          </article>
-          <article className="linea-tarjeta" id="academia">
-            <span className="linea-num">04</span>
-            <h2>
-              <em>Academia</em>
-            </h2>
-            <p>Aprende a encender tu propio camino, de la mano de quien empezó con una sola vela.</p>
-            <a
-              className="btn btn-line"
-              href={linkWhatsApp("Hola Fuego, quiero saber más sobre la Academia.")}
-              target="_blank"
-              rel="noopener"
-            >
-              Quiero aprender
-            </a>
-          </article>
-        </section>
+        <Catalogo />
 
         <section className="historia" id="historia">
           <div className="historia-titulo">
@@ -392,7 +205,7 @@ export default function Home() {
               encuentres tu calma.
             </p>
             <p>Si hoy tu cielo está nublado, enciende una. A veces, volver a empezar se parece a eso.</p>
-            <a className="btn btn-fire" href="#aromas">
+            <a className="btn btn-fire" href="#catalogo">
               Enciende la tuya
             </a>
           </div>

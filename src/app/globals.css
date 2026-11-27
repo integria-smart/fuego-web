@@ -412,106 +412,15 @@ body.claro .top {
   color: var(--arena);
 }
 
-/* ---------- Aromas: cada vela cambia el clima ---------- */
-.aromas {
-  position: relative;
-  background-color: #2a2622;
-}
-.aromas::before,
-.aromas::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 22svh;
-  pointer-events: none;
-  z-index: 1;
-}
-.aromas::before {
-  top: 0;
-  background: linear-gradient(var(--negro), transparent);
-}
-.aromas::after {
-  bottom: 0;
-  background: linear-gradient(transparent, var(--negro));
-}
-.aromas-pin {
-  position: relative;
-  z-index: 2;
-  height: 100svh;
-  min-height: 640px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: clamp(20px, 4svh, 44px);
-  overflow: hidden;
-}
-.aromas-head {
-  padding: 0 clamp(18px, 5vw, 80px);
-}
-.aromas-head h2 {
-  font-size: clamp(34px, 4.6vw, 72px);
-}
-.aromas-head .eyebrow {
-  margin-bottom: 12px;
-}
-.track {
-  display: flex;
-  gap: clamp(18px, 3vw, 48px);
-  padding: 0 clamp(18px, 5vw, 80px);
-  width: max-content;
-  will-change: transform;
-}
-.vela {
-  width: clamp(250px, 23vw, 340px);
-  flex: none;
-  opacity: 0.6;
-  transition: opacity 0.6s;
-}
-.vela.activa {
-  opacity: 1;
-}
-@media (min-width: 861px) {
-  .vela:nth-child(even) {
-    margin-top: clamp(18px, 4svh, 44px);
-  }
-}
-.vela-foto {
-  position: relative;
-  aspect-ratio: 4 / 4.6;
-  max-height: 44svh;
-  width: 100%;
-  border-radius: 28px;
-  overflow: hidden;
-  box-shadow: 0 0 0 0 transparent;
-  transition: box-shadow 0.8s;
-  margin-bottom: 18px;
-}
-.vela.activa .vela-foto {
-  box-shadow: 0 0 90px -18px var(--brillo);
-}
-.vela-foto img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  filter: brightness(0.94) sepia(0.08);
-  transition:
-    scale 1.2s cubic-bezier(0.2, 0.7, 0.2, 1),
-    filter 0.8s;
-}
-.vela.activa .vela-foto img {
-  filter: none;
-  scale: 1.05;
-}
+/* ---------- Catálogo interactivo ---------- */
 .vela-linea {
   margin: 0 0 6px;
   font-size: 11px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--brillo);
+  color: var(--arena);
 }
-.vela h3 {
+.cat-pieza h3 {
   font-size: clamp(24px, 2.2vw, 32px);
   line-height: 1.08;
 }
@@ -537,145 +446,290 @@ body.claro .top {
   font-size: 24px;
 }
 
-/* ---------- Líneas del catálogo ---------- */
-.linea {
-  padding: clamp(40px, 8svh, 90px) clamp(18px, 6vw, 96px) clamp(50px, 9svh, 100px);
+.cat {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(22px, 4svh, 44px);
+  padding: clamp(84px, 12svh, 120px) clamp(18px, 6vw, 96px) clamp(36px, 6svh, 70px);
+  background-color: var(--clima);
+  transition: background-color 1.1s ease;
+  overflow: hidden;
+  scroll-margin-top: 0;
+}
+.cat::before,
+.cat::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 16svh;
+  pointer-events: none;
+}
+.cat::before {
+  top: 0;
+  background: linear-gradient(var(--negro), transparent);
+}
+.cat::after {
+  bottom: 0;
+  background: linear-gradient(transparent, var(--negro));
+}
+/* La luz de la colección: se apaga y vuelve a subir con cada cambio. */
+.cat-luz {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    60% 55% at 68% 58%,
+    color-mix(in srgb, var(--brillo) 22%, transparent),
+    transparent 70%
+  );
+  opacity: 1;
+  transition: opacity 1.2s ease;
+}
+.cat-luz.off {
+  opacity: 0;
+  transition-duration: 0.34s;
+}
+.cat-top,
+.cat-panel {
+  position: relative;
+  z-index: 2;
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
 }
-.lineas-nav {
+.cat-top .eyebrow {
+  margin-bottom: 16px;
+}
+.cat-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-bottom: 1px solid color-mix(in srgb, var(--arena) 30%, transparent);
+}
+.cat-tabs button {
+  position: relative;
+  appearance: none;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  padding: 6px 12px 18px 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(19px, 2.1vw, 34px);
+  line-height: 1.1;
+  color: color-mix(in srgb, var(--tinta) 46%, transparent);
+  transition: color 0.5s;
+}
+.cat-tabs button:hover {
+  color: color-mix(in srgb, var(--tinta) 80%, transparent);
+}
+.cat-tabs button.activa {
+  color: var(--tinta);
+}
+.cat-tabs button::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 18%;
+  bottom: -1px;
+  height: 2px;
+  background: var(--fuego);
+  box-shadow: 0 0 18px 2px color-mix(in srgb, var(--fuego) 80%, transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.cat-tabs button.activa::after {
+  transform: scaleX(1);
+}
+.cat-tabs button:focus-visible,
+.cat-chips button:focus-visible,
+.cat-flechas button:focus-visible {
+  outline: 2px solid var(--arena);
+  outline-offset: 4px;
+}
+.cat-num {
+  display: block;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--fuego);
+  margin-bottom: 6px;
+}
+.cat-chips {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: clamp(50px, 9svh, 100px);
+  margin-top: 20px;
 }
-.lineas-nav a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 0 20px;
+.cat-chips button {
+  appearance: none;
+  cursor: pointer;
+  min-height: 40px;
+  padding: 0 18px;
   border: 1px solid color-mix(in srgb, var(--arena) 45%, transparent);
   border-radius: 999px;
+  background: transparent;
   color: var(--tinta);
-  text-decoration: none;
-  font-size: 12px;
+  font-family: inherit;
+  font-size: 11.5px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   transition:
     background 0.4s,
-    color 0.4s;
+    color 0.4s,
+    border-color 0.4s;
 }
-.lineas-nav a:hover {
+.cat-chips button:hover {
+  border-color: var(--arena);
+}
+.cat-chips button.activa {
   background: var(--arena);
+  border-color: var(--arena);
   color: var(--negro);
 }
-.linea-titulo {
-  border-top: 1px solid color-mix(in srgb, var(--arena) 35%, transparent);
-  padding-top: clamp(24px, 4svh, 44px);
-  margin-bottom: clamp(50px, 9svh, 100px);
+.cat-panel {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 70px);
+  align-items: center;
+  transition:
+    opacity 0.34s ease,
+    filter 0.34s ease;
 }
-.linea .linea-titulo {
-  margin-bottom: 0;
+.cat-panel.off {
+  opacity: 0;
+  filter: brightness(0.3);
 }
-.linea-num {
-  display: block;
-  font-family: var(--font-display), Georgia, serif;
-  font-style: italic;
-  font-size: 22px;
-  color: var(--fuego);
-  margin-bottom: 10px;
+.cat-info h2 {
+  font-size: clamp(32px, 3.5vw, 58px);
+  line-height: 1.04;
 }
-.linea-titulo h2,
-.linea-tarjeta h2 {
-  font-size: clamp(46px, 7.4vw, 120px);
-}
-.linea-titulo em,
-.linea-tarjeta em {
+.cat-info em {
   color: var(--arena);
 }
-.linea-titulo p,
-.linea-tarjeta p {
+.cat-info p {
   margin: 18px 0 0;
-  font-size: clamp(16px, 1.3vw, 20px);
+  font-size: clamp(15px, 1.15vw, 18px);
   line-height: 1.7;
-  max-width: 48ch;
+  max-width: 40ch;
   color: color-mix(in srgb, var(--tinta) 80%, transparent);
 }
-.lineas-extra {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(18px, 3vw, 48px);
+.cat-info .cat-resumen {
+  font-size: 13px;
+  color: color-mix(in srgb, var(--tinta) 55%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--arena) 25%, transparent);
+  padding-top: 16px;
 }
-.linea-tarjeta {
-  border: 1px solid color-mix(in srgb, var(--arena) 30%, transparent);
-  border-radius: 28px;
-  padding: clamp(28px, 4vw, 56px);
-  background: color-mix(in srgb, var(--arena) 5%, transparent);
+.cat-info > *,
+.cat-invitacion {
+  animation: encender 1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
-.linea-tarjeta h2 {
-  font-size: clamp(38px, 4.6vw, 72px);
-}
-.linea-tarjeta .btn {
-  margin-top: 28px;
-}
-
-/* ---------- Bouquets y recordatorios ---------- */
-.regalos {
+.cat-galeria {
   position: relative;
-  padding: clamp(80px, 15svh, 170px) clamp(18px, 6vw, 96px) clamp(40px, 8svh, 90px);
-  max-width: 1400px;
-  margin: 0 auto;
+  min-width: 0;
 }
-.regalos-head {
-  max-width: 760px;
-  margin-bottom: clamp(32px, 6svh, 64px);
+.cat-pista {
+  --hueco: clamp(16px, 2vw, 32px);
+  display: flex;
+  gap: var(--hueco);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding: 26px 4px 6px;
 }
-.regalos-head h2 {
-  font-size: clamp(34px, 4.6vw, 72px);
+.cat-pista::-webkit-scrollbar {
+  display: none;
 }
-.regalos-head em {
-  color: var(--arena);
+.cat-pieza {
+  flex: 0 0 calc((100% - 2 * var(--hueco)) / 3);
+  min-width: 0;
+  scroll-snap-align: start;
+  animation: encender 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(min(var(--i), 4) * 0.11s + 0.08s);
 }
-.regalos-nota {
-  margin: 20px 0 0;
-  font-size: clamp(16px, 1.25vw, 19px);
-  line-height: 1.7;
-  max-width: 56ch;
-  color: color-mix(in srgb, var(--tinta) 80%, transparent);
+@keyframes encender {
+  from {
+    opacity: 0;
+    filter: brightness(0.25);
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
 }
-.regalos-segundo {
-  margin-top: clamp(90px, 16svh, 180px);
-}
-.piezas {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(18px, 3vw, 48px);
-}
-.pieza:nth-child(2) {
-  margin-top: clamp(18px, 4svh, 44px);
-}
-.pieza-foto {
-  aspect-ratio: 4 / 4.8;
-  border-radius: 28px;
+.cat-foto {
+  aspect-ratio: 4 / 4.5;
+  max-height: 40svh;
+  width: 100%;
+  border-radius: 24px;
   overflow: hidden;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
-.pieza-foto img {
+.cat-foto img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
   transition: scale 1.2s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.pieza:hover .pieza-foto img {
+.cat-pieza:hover .cat-foto img {
   scale: 1.05;
 }
-.pieza .vela-linea {
+.cat-pieza .vela-linea {
   color: var(--arena);
 }
-.pieza h3 {
-  font-size: clamp(24px, 2.2vw, 32px);
-  line-height: 1.08;
+.cat-pieza h3 {
+  font-size: clamp(20px, 1.7vw, 27px);
+}
+.cat-pieza .vela-detalle {
+  font-size: 14px;
+  min-height: 4.4em;
+  margin-bottom: 10px;
+}
+.cat-flechas {
+  position: absolute;
+  top: -26px;
+  right: 4px;
+  display: flex;
+  gap: 8px;
+}
+.cat-flechas button {
+  appearance: none;
+  cursor: pointer;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--arena) 45%, transparent);
+  background: transparent;
+  color: var(--tinta);
+  font-size: 17px;
+  transition:
+    background 0.4s,
+    color 0.4s;
+}
+.cat-flechas button:hover {
+  background: var(--arena);
+  color: var(--negro);
+}
+.cat-invitacion {
+  justify-self: start;
+  max-width: 520px;
+  border: 1px solid color-mix(in srgb, var(--arena) 30%, transparent);
+  border-radius: 28px;
+  padding: clamp(28px, 4vw, 56px);
+  background: color-mix(in srgb, var(--arena) 6%, transparent);
+  animation-delay: 0.18s;
+}
+.cat-invitacion p {
+  margin: 0 0 26px;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(22px, 2.1vw, 32px);
+  line-height: 1.3;
 }
 
 /* ---------- Fotos de Mónica ---------- */
@@ -915,16 +969,6 @@ body.claro .top {
   .historia {
     grid-template-columns: 1fr;
   }
-  .piezas {
-    grid-template-columns: 1fr;
-    gap: 44px;
-  }
-  .lineas-extra {
-    grid-template-columns: 1fr;
-  }
-  .pieza:nth-child(2) {
-    margin-top: 0;
-  }
   .historia-titulo {
     position: static;
   }
@@ -932,28 +976,63 @@ body.claro .top {
     max-height: none;
     width: 100%;
   }
-  .aromas-pin {
-    height: auto;
-    min-height: 0;
-    padding: 18svh 0 16svh;
+  .cat {
+    padding-top: 96px;
   }
-  .track {
-    width: auto;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-padding: 0 18px;
+  .cat-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 14px;
+    border-bottom: 0;
+  }
+  .cat-tabs button {
     padding-bottom: 12px;
-    scrollbar-width: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--arena) 30%, transparent);
+    font-size: 21px;
   }
-  .track::-webkit-scrollbar {
+  .cat-chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin-right: -18px;
+    padding-right: 18px;
+  }
+  .cat-chips::-webkit-scrollbar {
     display: none;
   }
-  .vela {
-    width: 76vw;
-    scroll-snap-align: center;
+  .cat-chips button {
+    flex: none;
   }
-  .vela-foto {
-    max-height: none;
+  .cat-panel {
+    grid-template-columns: 1fr;
+    align-items: start;
+    align-content: start;
+    gap: 6px;
+  }
+  .cat-info .cat-resumen {
+    display: none;
+  }
+  .cat-pista {
+    margin-right: -18px;
+    padding-right: 18px;
+    scroll-padding-left: 4px;
+  }
+  .cat-pieza {
+    flex-basis: 70vw;
+  }
+  .cat-foto {
+    max-height: 31svh;
+  }
+  .cat-info p {
+    display: none;
+  }
+  .cat-pieza .vela-detalle {
+    min-height: 0;
+  }
+  .cat-flechas {
+    display: none;
+  }
+  .cat-invitacion {
+    margin-top: 22px;
   }
 }
 
@@ -973,8 +1052,12 @@ body.claro .top {
   .h1 .w > span {
     opacity: 1;
   }
-  .manifiesto-texto .w,
-  .vela {
+  .cat-pieza,
+  .cat-info > *,
+  .cat-invitacion {
+    animation: none;
+  }
+  .manifiesto-texto .w {
     opacity: 1;
   }
 }
